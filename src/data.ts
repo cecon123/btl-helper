@@ -1,3 +1,5 @@
+import { projectCodeFiles } from "./generatedProjectData";
+
 export type PageKey =
   | "dashboard"
   | "roles"
@@ -62,11 +64,105 @@ export type ScenarioFlow = {
     title: string;
     summary: string;
     path: string;
+    role?: string;
+    layer?: string;
+    trigger?: string;
+    input?: string;
+    output?: string;
     meaning: string;
     codeNotes: { line: number; code: string; note: string }[];
+    whyItMatters?: string;
+    nextLinks?: string[];
+    failureMode?: string;
     links: string[];
   }[];
 };
+
+const projectFileByPath = new Map(projectCodeFiles.map((file) => [file.path, file]));
+
+function flowCodeNotes(path: string, summary: string) {
+  const file = projectFileByPath.get(path);
+  const refs = [
+    ...(file?.importantLines ?? []),
+    ...(file?.declarations.map((item) => ({
+      line: item.line,
+      code: item.code,
+      explain: `Khai báo ${item.kind} ${item.name}, xác định trách nhiệm chính của file.`,
+    })) ?? []),
+    ...(file?.methods.map((item) => ({
+      line: item.line,
+      code: item.code,
+      explain: `Method ${item.name} là điểm neo để lần theo luồng gọi.`,
+    })) ?? []),
+  ];
+  const unique = refs.filter(
+    (ref, index, arr) => arr.findIndex((item) => item.line === ref.line && item.code === ref.code) === index,
+  );
+  const selected = unique.slice(0, path.includes("BidService.java") ? 8 : 5);
+  if (selected.length) {
+    return selected.map((ref) => ({
+      line: ref.line,
+      code: ref.code,
+      note: ref.explain,
+    }));
+  }
+  return [
+    {
+      line: 1,
+      code: path,
+      note: `${summary} File này ít line anchor tự động; mở toàn file để đọc context.`,
+    },
+  ];
+}
+
+function inferFlowLayer(path: string, badge: string) {
+  return projectFileByPath.get(path)?.layer ?? badge;
+}
+
+function inferFlowTrigger(module: string, badge: string, title: string) {
+  if (badge.includes("FXML")) return `Người dùng nhìn hoặc thao tác trên màn ${title}.`;
+  if (badge.includes("CONTROLLER") || badge.includes("CLIENT") || badge.includes("UI")) return `Controller nhận event JavaFX và gọi service/client util tương ứng.`;
+  if (badge.includes("SERVICE") && module === "client") return "Client service đóng gói Request và gọi SocketClient.";
+  if (badge.includes("HANDLER") || badge.includes("SERVER")) return "Server nhận MessageType từ RequestRouter/ClientHandler và dispatch vào handler.";
+  if (badge.includes("DAO") || badge.includes("SQL") || badge.includes("SCHEMA")) return "Server service cần đọc/ghi SQLite hoặc map dữ liệu persistence.";
+  if (badge.includes("EVENT")) return "Business rule thay đổi trạng thái và cần push realtime event cho client đang subscribe.";
+  if (badge.includes("TEST")) return "Khi bị hỏi chứng minh behavior, mở test này để nói Arrange-Act-Assert.";
+  if (badge.includes("MAVEN") || badge.includes("CI")) return "Khi build/test/deploy, Maven hoặc CI đọc cấu hình này.";
+  return `Bước ${title} chạy khi luồng đi tới layer ${module}.`;
+}
+
+function inferFlowInput(module: string, badge: string, title: string) {
+  if (badge.includes("FXML")) return "Input là thao tác hoặc dữ liệu người dùng nhập trên UI.";
+  if (badge.includes("DTO")) return "Input là payload contract dùng chung giữa client và server.";
+  if (badge.includes("HANDLER")) return "Input là Request JSON đã parse, kèm token/session và MessageType.";
+  if (badge.includes("SERVICE")) return module === "server" ? "Input là DTO/domain data đã qua handler và userId từ session." : "Input là dữ liệu từ controller để serialize thành request.";
+  if (badge.includes("DAO")) return "Input là domain object/id/filter từ service; output là row SQLite được map về model/DTO.";
+  if (badge.includes("EVENT")) return "Input là event business như bid thành công, auction close hoặc time extended.";
+  if (badge.includes("TEST")) return "Input là fixture/mock/fake DAO hoặc dữ liệu test được arrange trước.";
+  return "Input là dữ liệu từ bước trước trong flow.";
+}
+
+function inferFlowOutput(module: string, badge: string) {
+  if (badge.includes("FXML") || badge.includes("UI")) return "Output là màn hình/control/state để controller xử lý hoặc cập nhật.";
+  if (badge.includes("DTO")) return "Output là object serialize được qua Gson JSON.";
+  if (badge.includes("HANDLER")) return "Output là Response hoặc lời gọi xuống service.";
+  if (badge.includes("SERVICE")) return module === "server" ? "Output là business result, state DB thay đổi hoặc event cần broadcast." : "Output là CompletableFuture<Response<...>> cho controller.";
+  if (badge.includes("DAO")) return "Output là dữ liệu đã persist/query, hoặc exception để transaction rollback.";
+  if (badge.includes("EVENT")) return "Output là message realtime gửi tới subscriber.";
+  if (badge.includes("TEST")) return "Output là assert pass/fail chứng minh invariant.";
+  return "Output chuyển sang bước kế tiếp trong flow.";
+}
+
+function inferFailureMode(module: string, badge: string, path: string) {
+  if (badge.includes("FXML") || badge.includes("CONTROLLER") || badge.includes("UI")) return "Nếu sai, user thấy form không phản hồi, validate sai hoặc UI không cập nhật đúng.";
+  if (badge.includes("DTO") || path.includes("/protocol/")) return "Nếu sai, client/server lệch contract, Gson parse lỗi hoặc handler nhận sai MessageType.";
+  if (badge.includes("HANDLER")) return "Nếu sai, request bị route nhầm, bỏ qua authorization hoặc trả Response lỗi không rõ.";
+  if (badge.includes("SERVICE")) return "Nếu sai, business rule bị phá: bid sai, role sai, tiền sai hoặc trạng thái auction sai.";
+  if (badge.includes("DAO") || badge.includes("SQL")) return "Nếu sai, dữ liệu DB sai, transaction rollback hoặc test DAO fail.";
+  if (badge.includes("EVENT")) return "Nếu sai, client không nhận realtime update hoặc subscriber cũ vẫn bị gửi event.";
+  if (badge.includes("TEST")) return "Nếu test fail, behavior đang được test có nguy cơ regression khi demo.";
+  return "Nếu sai, luồng dừng ở bước này và cần trace từ bước trước.";
+}
 
 const scenarioTemplates = {
   register: [
@@ -122,6 +218,19 @@ const scenarioTemplates = {
     ["server", "HANDLER", "WalletRequestHandler.java", "Lấy user từ session và gọi WalletService.", "server/src/main/java/com/auction/server/socket/WalletRequestHandler.java"],
     ["server", "SERVICE", "WalletService.java", "Cập nhật balance/lockedBalance, kiểm insufficient funds.", "server/src/main/java/com/auction/server/service/WalletService.java"],
   ],
+  placeBid: [
+    ["client", "FXML", "AuctionDetailView.fxml", "Bidder mở detail, thấy current price, bid history và nút đặt bid.", "client/src/main/resources/fxml/AuctionDetailView.fxml"],
+    ["client", "CONTROLLER", "LiveBiddingController.java", "Controller lấy amount từ UI, validate nhanh và tạo request bid.", "client/src/main/java/com/auction/client/controller/LiveBiddingController.java"],
+    ["common", "DTO", "PlaceBidRequest.java / PlaceBidResponse.java", "DTO contract chứa auctionId, bidderId/amount và kết quả server trả về.", "common/src/main/java/com/auction/common/dto/bid/PlaceBidRequest.java"],
+    ["common", "PROTOCOL", "MessageType.java / Request.java / Response.java", "Protocol xác định PLACE_BID và envelope JSON newline qua socket.", "common/src/main/java/com/auction/common/protocol/MessageType.java"],
+    ["client", "SOCKET", "SocketClient.java", "Client gửi request, chờ response theo request id và vẫn nhận event realtime.", "client/src/main/java/com/auction/client/socket/SocketClient.java"],
+    ["server", "HANDLER", "BidRequestHandler.java", "Handler parse payload, lấy session user và gọi BidService.", "server/src/main/java/com/auction/server/socket/BidRequestHandler.java"],
+    ["server", "LOCK", "AuctionLockManager.java", "Lấy lock theo auctionId để nhiều bidder không ghi đè giá hiện tại.", "server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java"],
+    ["server", "SERVICE", "BidService.java", "Kiểm auction active, amount hợp lệ, ví đủ tiền, ghi bid, xử lý auto-bid/anti-sniping.", "server/src/main/java/com/auction/server/service/BidService.java"],
+    ["server", "DAO", "SQLiteBidDao.java / SQLiteAuctionDao.java", "DAO insert bid và cập nhật current price/end time trong transaction service.", "server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java"],
+    ["server", "EVENT", "NotificationService.java", "Broadcast BID_PLACED/TIME_EXTENDED để các client đang xem detail cập nhật.", "server/src/main/java/com/auction/server/service/NotificationService.java"],
+    ["common", "DTO", "BidUpdateEvent.java", "Event payload cho client cập nhật current bid, winner, history và countdown.", "common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java"],
+  ],
   settlement: [
     ["server", "SERVICE", "BidService.java", "Khi bid thành công, tiền được lock/giữ để bảo đảm bidder có khả năng thanh toán.", "server/src/main/java/com/auction/server/service/BidService.java"],
     ["server", "SERVICE", "WalletService.java", "Release khi outbid, transfer seller khi winner thắng sau close.", "server/src/main/java/com/auction/server/service/WalletService.java"],
@@ -159,6 +268,15 @@ const scenarioTemplates = {
     ["server", "HANDLER", "AdminRequestHandler.java", "ADMIN_GET_AUCTIONS/ADMIN_CANCEL_AUCTION.", "server/src/main/java/com/auction/server/socket/AdminRequestHandler.java"],
     ["server", "SERVICE", "AuctionService.java", "Cancel auction theo quyền admin và status.", "server/src/main/java/com/auction/server/service/AuctionService.java"],
     ["server", "EVENT", "NotificationService.java", "Broadcast AUCTION_CANCELED/AUCTION_LIST_UPDATED.", "server/src/main/java/com/auction/server/service/NotificationService.java"],
+  ],
+  authorization: [
+    ["client", "SERVICE", "AuthClientService.java", "Sau login client giữ token và gửi token trong các request cần quyền.", "client/src/main/java/com/auction/client/service/AuthClientService.java"],
+    ["common", "PROTOCOL", "MessageType.java", "Mỗi command được định danh bằng MessageType để router biết quyền cần kiểm tra.", "common/src/main/java/com/auction/common/protocol/MessageType.java"],
+    ["server", "ROUTER", "RequestRouter.java", "Router là cửa vào server, không tin UI ẩn nút mà kiểm token/role trước khi dispatch.", "server/src/main/java/com/auction/server/socket/RequestRouter.java"],
+    ["server", "SESSION", "SessionManager.java", "Session map token sang userId/role và invalidate khi logout/disconnect cần thiết.", "server/src/main/java/com/auction/server/service/SessionManager.java"],
+    ["server", "HANDLER", "AdminRequestHandler.java", "Handler admin tiếp tục kiểm role ADMIN trước khi thao tác user/auction.", "server/src/main/java/com/auction/server/socket/AdminRequestHandler.java"],
+    ["server", "SERVICE", "AuctionService.java / BidService.java", "Service kiểm owner/resource và business rule, vì role hợp lệ chưa đủ để sửa mọi dữ liệu.", "server/src/main/java/com/auction/server/service/AuctionService.java"],
+    ["server", "TEST", "RequestRouterAuthorizationTest.java", "Test chứng minh request sai role bị chặn ở server.", "server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java"],
   ],
   images: [
     ["client", "UTIL", "FileUtil.java", "Chọn/validate file ảnh từ máy client.", "client/src/main/java/com/auction/client/util/FileUtil.java"],
@@ -209,12 +327,14 @@ const generatedScenarioFlows: ScenarioFlow[] = Object.entries(scenarioTemplates)
     sellerUpdateCancel: ["Seller update/cancel", "Luồng seller sửa hoặc hủy auction", "Rule owner/status/bid count và event list update."],
     sellerCenter: ["Seller center", "Luồng seller center và stats", "KPI doanh thu, success rate và danh sách phiên của seller."],
     wallet: ["Wallet", "Luồng deposit/withdraw ví", "Available, locked escrow và insufficient funds."],
+    placeBid: ["Place bid", "Luồng đặt bid chi tiết", "Từ UI bidder đến lock, transaction, DAO và realtime event."],
     settlement: ["Settlement", "Luồng escrow và settlement", "Lock fund, release khi outbid, transfer khi winner thắng."],
     autoBid: ["Auto-bid", "Luồng auto-bidding đầy đủ", "Set max bid, phản hồi tự động, tránh vượt max/loop."],
     antiSniping: ["Anti-sniping", "Luồng anti-sniping kéo dài giờ", "Bid sát giờ, extend endTime, push TIME_EXTENDED."],
     realtime: ["Realtime", "Luồng subscribe/unsubscribe realtime", "Server push event thay vì polling."],
     adminUsers: ["Admin users", "Luồng admin quản lý user", "Load user và enable/disable theo role ADMIN."],
     adminAuctions: ["Admin auctions", "Luồng admin quản lý auction", "Load/cancel auction và broadcast event."],
+    authorization: ["Authorization", "Luồng phân quyền server-side", "Token, role, owner/resource check và test request sai quyền."],
     images: ["Images", "Luồng upload/asset ảnh", "FileUtil, ImageUrlUtil và AssetServer HTTP."],
     errors: ["Errors", "Luồng error handling", "Exception server, Response error và notification client."],
     database: ["Database", "Luồng schema và DAO mapping", "Schema SQL, SQLite DAO và DAO tests."],
@@ -236,11 +356,18 @@ const generatedScenarioFlows: ScenarioFlow[] = Object.entries(scenarioTemplates)
       title,
       summary,
       path,
+      role: module === "client" ? "Client/UI" : module === "server" ? "Server" : "Common contract",
+      layer: inferFlowLayer(path, badge),
+      trigger: inferFlowTrigger(module, badge, title),
+      input: inferFlowInput(module, badge, title),
+      output: inferFlowOutput(module, badge),
       meaning: `Mở ${path} để giải thích vai trò của bước "${title}" trong luồng ${label}.`,
-      codeNotes: [
-        { line: 1, code: title, note: summary },
-        { line: 1, code: path, note: "Path cần mở khi vấn đáp để chỉ code/file thật." },
-      ],
+      codeNotes: flowCodeNotes(path, summary),
+      whyItMatters: `${summary} Đây là điểm nối để chứng minh ${label} không chỉ là UI mà đi qua đúng layer, đúng file và đúng rule.`,
+      nextLinks: rows
+        .slice(index + 1, index + 3)
+        .map((row) => row[4]),
+      failureMode: inferFailureMode(module, badge, path),
       links: rows
         .map((row) => row[4])
         .filter((link) => link !== path)
@@ -1012,6 +1139,138 @@ export const theoryTopics: StudyTopic[] = [
     projectExample: "ItemFactory tạo Electronics/Art/Vehicle; NotificationService phát event tới subscribers.",
     files: ["ItemFactory.java", "NotificationService.java", "LockRegistry.java"],
     links: [{ label: "Refactoring Guru patterns", url: "https://refactoring.guru/design-patterns" }],
+    status: "review",
+  },
+  {
+    id: "solid-overview",
+    title: "SOLID trong online-auction-system",
+    category: "Design Principles & Patterns",
+    level: "Defense",
+    summary: "SOLID không phải phần trang trí: nó giải thích vì sao Controller, ClientService, ServerService, DAO và DTO được tách riêng để nhóm dễ hiểu và dễ test.",
+    projectExample: "docs/class-diagram.md nêu SRP, OCP và DIP; code thể hiện qua BidService phụ thuộc BidDao/AuctionDao/UserDao interface.",
+    files: ["docs/class-diagram.md", "BidService.java", "BidDao.java", "AuctionDao.java", "UserDao.java"],
+    links: [{ label: "SOLID principles", url: "https://www.baeldung.com/solid-principles" }],
+    status: "risk",
+  },
+  {
+    id: "srp-layered",
+    title: "SRP và Layered Architecture",
+    category: "Design Principles & Patterns",
+    level: "Core",
+    summary: "Single Responsibility nghĩa là mỗi lớp có một lý do chính để thay đổi: controller cho UI, service cho rule, DAO cho SQL, DTO cho payload.",
+    projectExample: "AuctionDetailController render UI; AuctionClientService gửi socket; AuctionService xử lý rule; SQLiteAuctionDao query DB.",
+    files: ["AuctionDetailController.java", "AuctionClientService.java", "AuctionService.java", "SQLiteAuctionDao.java"],
+    links: [{ label: "Layered architecture", url: "https://martinfowler.com/bliki/PresentationDomainDataLayering.html" }],
+    status: "done",
+  },
+  {
+    id: "ocp-item-factory",
+    title: "OCP qua ItemFactory",
+    category: "Design Principles & Patterns",
+    level: "Defense",
+    summary: "Open/Closed: thêm loại item mới nên mở rộng model/factory mapping, không sửa rải rác logic đấu giá.",
+    projectExample: "ItemFactory tạo Electronics/Art/Vehicle từ ItemType; AuctionService chỉ gọi factory.create thay vì tự new từng subclass.",
+    files: ["ItemFactory.java", "Item.java", "Electronics.java", "Art.java", "Vehicle.java", "AuctionService.java"],
+    links: [{ label: "Factory Method", url: "https://refactoring.guru/design-patterns/factory-method" }],
+    status: "review",
+  },
+  {
+    id: "lsp-domain-model",
+    title: "LSP trong Item/User inheritance",
+    category: "Design Principles & Patterns",
+    level: "Advanced",
+    summary: "Liskov Substitution: subclass như Electronics/Art/Vehicle phải dùng được ở nơi code mong đợi Item mà không phá invariant.",
+    projectExample: "ModelInheritanceTest kiểm kế thừa User/Item; DAO/service có thể xử lý Item chung khi không cần field riêng.",
+    files: ["Item.java", "Electronics.java", "Art.java", "Vehicle.java", "User.java", "ModelInheritanceTest.java"],
+    links: [{ label: "Liskov substitution", url: "https://www.baeldung.com/java-liskov-substitution-principle" }],
+    status: "review",
+  },
+  {
+    id: "isp-dao-split",
+    title: "ISP qua DAO tách theo aggregate",
+    category: "Design Principles & Patterns",
+    level: "Advanced",
+    summary: "Interface Segregation giúp service không phụ thuộc một DAO khổng lồ; mỗi DAO chỉ chứa nhóm method theo User/Auction/Bid/Item/AutoBid.",
+    projectExample: "BidService dùng BidDao, AuctionDao, UserDao, AutoBidDao theo đúng nhu cầu thay vì một DatabaseService chung.",
+    files: ["BidDao.java", "AuctionDao.java", "UserDao.java", "ItemDao.java", "AutoBidDao.java", "BidService.java"],
+    links: [{ label: "Interface segregation", url: "https://www.baeldung.com/java-interface-segregation" }],
+    status: "review",
+  },
+  {
+    id: "dip-testability",
+    title: "DIP và testability",
+    category: "Design Principles & Patterns",
+    level: "Defense",
+    summary: "Dependency Inversion: service phụ thuộc abstraction như BidDao/AuctionDao, nhờ đó test có thể dùng fake/failing DAO để ép lỗi rollback.",
+    projectExample: "BidServiceTransactionTest dùng FailingBidDao để kiểm wallet/auction không ở trạng thái nửa cập nhật.",
+    files: ["BidService.java", "BidServiceTransactionTest.java", "BidDao.java", "AuctionDao.java", "Database.java"],
+    links: [{ label: "Dependency inversion", url: "https://www.baeldung.com/java-dependency-inversion-principle" }],
+    status: "risk",
+  },
+  {
+    id: "dao-repository-pattern",
+    title: "DAO/Repository pattern",
+    category: "Design Principles & Patterns",
+    level: "Core",
+    summary: "DAO/Repository cô lập SQL khỏi nghiệp vụ; service nói bằng domain operation, DAO chịu trách nhiệm map ResultSet và statement.",
+    projectExample: "SQLiteAuctionDao map auction/status/settlement; AuctionService không viết SELECT/INSERT trực tiếp.",
+    files: ["AuctionDao.java", "SQLiteAuctionDao.java", "BidDao.java", "SQLiteBidDao.java", "AuctionService.java"],
+    links: [{ label: "Repository pattern", url: "https://martinfowler.com/eaaCatalog/repository.html" }],
+    status: "done",
+  },
+  {
+    id: "observer-realtime",
+    title: "Observer cho realtime bidding",
+    category: "Design Principles & Patterns",
+    level: "Defense",
+    summary: "Observer: client subscribe một auction, NotificationService giữ danh sách observers và broadcast event khi bid/status/time thay đổi.",
+    projectExample: "SubscriptionRequestHandler gọi subscribe; BidService/AuctionService gọi NotificationService để push BID_UPDATE/TIME_EXTENDED/AUCTION_CLOSED.",
+    files: ["NotificationService.java", "SubscriptionRequestHandler.java", "BidService.java", "AuctionService.java", "SocketClient.java"],
+    links: [{ label: "Observer pattern", url: "https://refactoring.guru/design-patterns/observer" }],
+    status: "risk",
+  },
+  {
+    id: "singleton-shared-resources",
+    title: "Singleton cho tài nguyên chia sẻ",
+    category: "Design Principles & Patterns",
+    level: "Advanced",
+    summary: "Singleton được dùng cho tài nguyên cần thống nhất toàn app như Database, JsonMapper, NotificationService, SessionManager, AuctionLockManager.",
+    projectExample: "Database.getInstance bật cấu hình SQLite; AuctionLockManager.getInstance dùng cùng registry lock theo auctionId.",
+    files: ["Database.java", "JsonMapper.java", "NotificationService.java", "SessionManager.java", "AuctionLockManager.java"],
+    links: [{ label: "Singleton tradeoffs", url: "https://refactoring.guru/design-patterns/singleton" }],
+    status: "review",
+  },
+  {
+    id: "mvc-dto-protocol",
+    title: "MVC + DTO + Protocol contract",
+    category: "Design Principles & Patterns",
+    level: "Core",
+    summary: "MVC tổ chức client JavaFX; DTO/protocol giữ hợp đồng qua socket để client/server không phụ thuộc implementation của nhau.",
+    projectExample: "LoginController tạo LoginRequest; SocketClient gửi Request<MessageType>; AuthRequestHandler trả Response<LoginResponse>.",
+    files: ["LoginController.java", "LoginRequest.java", "Request.java", "Response.java", "AuthRequestHandler.java"],
+    links: [{ label: "DTO pattern", url: "https://martinfowler.com/eaaCatalog/dataTransferObject.html" }],
+    status: "done",
+  },
+  {
+    id: "transaction-boundary-principle",
+    title: "Transaction boundary và consistency",
+    category: "Design Principles & Patterns",
+    level: "Defense",
+    summary: "Boundary transaction phải bao quanh các thay đổi cùng invariant; notification nên gửi sau khi dữ liệu đã commit thành công.",
+    projectExample: "BidService đặt bid cần update auction, bid history, wallet hold và auto bid trong một đơn vị nhất quán.",
+    files: ["BidService.java", "Database.java", "BidServiceTransactionTest.java", "AuctionSettlementTest.java"],
+    links: [{ label: "ACID", url: "https://www.sqlite.org/transactional.html" }],
+    status: "risk",
+  },
+  {
+    id: "separation-team-workflow",
+    title: "Separation of Concerns cho học nhóm",
+    category: "Design Principles & Patterns",
+    level: "Core",
+    summary: "Tách concern giúp mỗi thành viên học theo phần nhưng vẫn nối được luồng: UI, protocol, service, DAO, test và docs.",
+    projectExample: "docs/development.md mô tả workflow thêm feature: DTO -> MessageType -> handler/service -> FXML/controller -> test.",
+    files: ["docs/development.md", "RequestRouter.java", "AuctionRequestHandler.java", "AuctionClientService.java", "CreateAuctionController.java"],
+    links: [{ label: "Separation of concerns", url: "https://en.wikipedia.org/wiki/Separation_of_concerns" }],
     status: "review",
   },
   {

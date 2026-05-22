@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Activity,
   BookOpen,
@@ -11,17 +13,21 @@ import {
   GraduationCap,
   Layers3,
   Lock,
+  Moon,
   Network,
   PlayCircle,
   Search,
   Server,
   ShieldCheck,
   Sparkles,
+  Sun,
   TimerReset,
   Users,
   WalletCards,
 } from "lucide-react";
-import { useDeferredValue, useMemo, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import {
   Bar,
   BarChart,
@@ -65,14 +71,16 @@ import {
 } from "./generatedProjectData";
 
 const nav = [
-  { key: "dashboard", label: "Learning Cockpit", icon: GraduationCap },
-  { key: "roles", label: "Role paths", icon: Users },
-  { key: "flows", label: "Visualize", icon: GitBranch },
-  { key: "code", label: "Code map", icon: FileCode2 },
-  { key: "theory", label: "Theory library", icon: BookOpen },
-  { key: "tests", label: "Test lab", icon: ClipboardCheck },
-  { key: "interview", label: "Vấn đáp", icon: Sparkles },
-] satisfies { key: PageKey; label: string; icon: typeof GraduationCap }[];
+  { key: "dashboard", label: "Learning Cockpit", icon: GraduationCap, href: "/" },
+  { key: "roles", label: "Role paths", icon: Users, href: "/roles" },
+  { key: "flows", label: "Visualize", icon: GitBranch, href: "/visualize" },
+  { key: "code", label: "Code map", icon: FileCode2, href: "/code-map" },
+  { key: "theory", label: "Theory library", icon: BookOpen, href: "/theory" },
+  { key: "tests", label: "Test lab", icon: ClipboardCheck, href: "/test-lab" },
+  { key: "interview", label: "Vấn đáp", icon: Sparkles, href: "/interview" },
+] satisfies { key: PageKey; label: string; icon: typeof GraduationCap; href: string }[];
+
+const routeByPage = Object.fromEntries(nav.map((item) => [item.key, item.href])) as Record<PageKey, string>;
 
 const iconByLane = {
   Client: Code2,
@@ -94,8 +102,12 @@ const statusClass: Record<StudyStatus, string> = {
   risk: "status-risk",
 };
 
-export default function App() {
-  const [activePage, setActivePage] = useState<PageKey>("dashboard");
+const interviewFilters = ["All", "Flow", "Design", "SOLID", "Pattern", "Debug", "Test", "Line code"] as const;
+const flowStepFilters = ["All", "Client", "Socket", "Protocol", "Service", "DAO", "Realtime", "Test"] as const;
+type ThemeMode = "light" | "dark";
+
+export default function LearningApp({ page }: { page: PageKey }) {
+  const router = useRouter();
   const [role, setRole] = useState<RoleKey>("Bidder");
   const [query, setQuery] = useState("");
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -103,6 +115,10 @@ export default function App() {
   const [lockMode, setLockMode] = useState<"race" | "locked">("locked");
   const [scenarioId, setScenarioId] = useState("startup");
   const [expandedScenarioStep, setExpandedScenarioStep] = useState("startup-server-main");
+  const [theme, setTheme] = useState<ThemeMode>(() => {
+    const savedTheme = localStorage.getItem("btl-viva-theme");
+    return savedTheme === "dark" ? "dark" : "light";
+  });
   const [checked, setChecked] = useState<Record<string, boolean>>(() => {
     try {
       return JSON.parse(localStorage.getItem("btl-viva-progress") ?? "{}");
@@ -114,6 +130,12 @@ export default function App() {
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const currentRole = rolePaths.find((item) => item.role === role)!;
   const currentQuestion = generatedQuestions[questionIndex] ?? generatedQuestions[0];
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    localStorage.setItem("btl-viva-theme", theme);
+  }, [theme]);
 
   const filteredFiles = useMemo(() => {
     if (!deferredQuery) return projectCodeFiles;
@@ -150,15 +172,25 @@ export default function App() {
     });
   }
 
+  function navigateToPage(nextPage: PageKey) {
+    router.push(routeByPage[nextPage]);
+  }
+
+  function toggleTheme() {
+    setTheme((current) => (current === "dark" ? "light" : "dark"));
+  }
+
+  const ThemeIcon = theme === "dark" ? Sun : Moon;
+
   return (
-    <div className="app-shell">
+    <div className="app-shell" data-theme={theme}>
       <a className="skip-link" href="#main-content">
         Bỏ qua điều hướng
       </a>
       <aside className="sidebar" aria-label="Điều hướng chính">
         <div className="brand">
           <div className="brand-mark">
-            <GraduationCap size={22} aria-hidden />
+            <img src="/ltnc-cat.png" alt="" className="brand-logo" />
           </div>
           <div>
             <strong>BTL Viva Helper</strong>
@@ -170,18 +202,22 @@ export default function App() {
           {nav.map((item) => {
             const Icon = item.icon;
             return (
-              <button
+              <Link
                 key={item.key}
-                className={activePage === item.key ? "nav-item active" : "nav-item"}
-                type="button"
-                onClick={() => setActivePage(item.key)}
+                className={page === item.key ? "nav-item active" : "nav-item"}
+                href={item.href}
               >
                 <Icon size={18} aria-hidden />
                 <span>{item.label}</span>
-              </button>
+              </Link>
             );
           })}
         </nav>
+
+        <button className="theme-toggle sidebar-theme-toggle" type="button" onClick={toggleTheme} aria-label="Đổi light/dark mode">
+          <ThemeIcon size={17} aria-hidden />
+          <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+        </button>
 
         <div className="sidebar-note">
           <span className="eyebrow">Repo gốc</span>
@@ -191,25 +227,25 @@ export default function App() {
 
       <main id="main-content" className="main-content">
         <TopBar query={query} setQuery={setQuery} />
-        {activePage === "dashboard" && (
-          <Dashboard checked={checked} toggleProgress={toggleProgress} setActivePage={setActivePage} />
+        {page === "dashboard" && (
+          <Dashboard checked={checked} toggleProgress={toggleProgress} setActivePage={navigateToPage} theme={theme} />
         )}
-        {activePage === "roles" && <Roles role={role} setRole={setRole} currentRole={currentRole} />}
-        {activePage === "flows" && (
+        {page === "roles" && <Roles role={role} setRole={setRole} currentRole={currentRole} />}
+        {page === "flows" && (
           <Visualize
             lockMode={lockMode}
             setLockMode={setLockMode}
-            setActivePage={setActivePage}
+            setActivePage={navigateToPage}
             scenarioId={scenarioId}
             setScenarioId={setScenarioId}
             expandedScenarioStep={expandedScenarioStep}
             setExpandedScenarioStep={setExpandedScenarioStep}
           />
         )}
-        {activePage === "code" && <CodeMap files={filteredFiles} query={query} setQuery={setQuery} />}
-        {activePage === "theory" && <Theory topics={filteredTopics} />}
-        {activePage === "tests" && <Tests checked={checked} toggleProgress={toggleProgress} />}
-        {activePage === "interview" && (
+        {page === "code" && <CodeMap files={filteredFiles} query={query} setQuery={setQuery} />}
+        {page === "theory" && <Theory topics={filteredTopics} />}
+        {page === "tests" && <Tests checked={checked} toggleProgress={toggleProgress} />}
+        {page === "interview" && (
           <Interview
             question={currentQuestion}
             questionIndex={questionIndex}
@@ -237,16 +273,18 @@ function TopBar({
         <p className="eyebrow">Mục tiêu bảo vệ</p>
         <h1>Nhìn vào là học được luồng, code, test và lý thuyết</h1>
       </div>
-      <label className="search-box">
-        <Search size={18} aria-hidden />
-        <span className="sr-only">Tìm kiếm file, theory, test</span>
-        <input
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Tìm: BidService, socket, Maven..."
-          type="search"
-        />
-      </label>
+      <div className="topbar-actions">
+        <label className="search-box">
+          <Search size={18} aria-hidden />
+          <span className="sr-only">Tìm kiếm file, theory, test</span>
+          <input
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Tìm: BidService, socket, Maven..."
+            type="search"
+          />
+        </label>
+      </div>
     </header>
   );
 }
@@ -255,12 +293,31 @@ function Dashboard({
   checked,
   toggleProgress,
   setActivePage,
+  theme,
 }: {
   checked: Record<string, boolean>;
   toggleProgress: (id: string) => void;
   setActivePage: (page: PageKey) => void;
+  theme: ThemeMode;
 }) {
   const doneCount = Object.values(checked).filter(Boolean).length;
+  const chartColors = theme === "dark"
+    ? {
+        axis: "#7d8794",
+        grid: "#34445c",
+        primary: "#7d91cc",
+        cursor: "#243247",
+        tooltipBg: "#172033",
+        tooltipText: "#a7adb8",
+      }
+    : {
+        axis: "#475569",
+        grid: "#d9e2ec",
+        primary: "#3157d5",
+        cursor: "#eef4ff",
+        tooltipBg: "#ffffff",
+        tooltipText: "#111827",
+      };
   const today = [
     { id: "todo-bid", label: "Giải thích PLACE_BID end-to-end", page: "flows" as PageKey },
     { id: "todo-concurrency", label: "Ôn race condition + transaction rollback", page: "theory" as PageKey },
@@ -304,10 +361,13 @@ function Dashboard({
           <div className="radar-wrap">
             <ResponsiveContainer width="100%" height={245}>
               <RadarChart data={readiness}>
-                <PolarGrid />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: "#312E81", fontSize: 12 }} />
-                <Radar dataKey="score" stroke="#4F46E5" fill="#4F46E5" fillOpacity={0.22} />
-                <Tooltip />
+                <PolarGrid stroke={chartColors.grid} />
+                <PolarAngleAxis dataKey="subject" tick={{ fill: chartColors.axis, fontSize: 12 }} />
+                <Radar dataKey="score" stroke={chartColors.primary} fill={chartColors.primary} fillOpacity={0.24} />
+                <Tooltip
+                  contentStyle={{ background: chartColors.tooltipBg, borderColor: chartColors.grid, color: chartColors.tooltipText }}
+                  labelStyle={{ color: chartColors.tooltipText }}
+                />
               </RadarChart>
             </ResponsiveContainer>
           </div>
@@ -360,11 +420,15 @@ function Dashboard({
         </div>
         <ResponsiveContainer width="100%" height={260}>
           <BarChart data={milestones} layout="vertical" margin={{ left: 18, right: 28 }}>
-            <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-            <XAxis type="number" domain={[0, 100]} tick={{ fill: "#475569" }} />
-            <YAxis dataKey="label" type="category" width={150} tick={{ fill: "#312E81", fontSize: 12 }} />
-            <Tooltip />
-            <Bar dataKey="value" fill="#4F46E5" radius={[0, 6, 6, 0]} />
+            <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke={chartColors.grid} />
+            <XAxis type="number" domain={[0, 100]} tick={{ fill: chartColors.axis }} />
+            <YAxis dataKey="label" type="category" width={150} tick={{ fill: chartColors.axis, fontSize: 12 }} />
+            <Tooltip
+              contentStyle={{ background: chartColors.tooltipBg, borderColor: chartColors.grid, color: chartColors.tooltipText }}
+              labelStyle={{ color: chartColors.tooltipText }}
+              cursor={{ fill: chartColors.cursor }}
+            />
+            <Bar dataKey="value" fill={chartColors.primary} radius={[0, 6, 6, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>
@@ -471,6 +535,14 @@ function Visualize({
   setExpandedScenarioStep: (id: string) => void;
 }) {
   const selectedScenario = scenarioFlows.find((flow) => flow.id === scenarioId) ?? scenarioFlows[0];
+  const [flowFilter, setFlowFilter] = useState<(typeof flowStepFilters)[number]>("All");
+  const filteredScenarioSteps = useMemo(() => {
+    if (flowFilter === "All") return selectedScenario.steps;
+    const needle = flowFilter.toLowerCase();
+    return selectedScenario.steps.filter((step) =>
+      [step.badge, step.layer, step.role, step.path, step.title].join(" ").toLowerCase().includes(needle),
+    );
+  }, [flowFilter, selectedScenario.steps]);
 
   return (
     <section className="page-stack">
@@ -502,12 +574,24 @@ function Visualize({
             </button>
           ))}
         </div>
+        <div className="interview-filter-bar flow-filter-bar" aria-label="Lọc layer trong scenario">
+          {flowStepFilters.map((filter) => (
+            <button
+              key={filter}
+              className={flowFilter === filter ? "active" : ""}
+              type="button"
+              onClick={() => setFlowFilter(filter)}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
         <div className="scenario-heading">
           <h3>{selectedScenario.title}</h3>
           <p>{selectedScenario.subtitle}</p>
         </div>
         <div className="scenario-steps">
-          {selectedScenario.steps.map((step, index) => {
+          {filteredScenarioSteps.map((step, index) => {
             const isOpen = expandedScenarioStep === step.id;
             return (
               <article key={step.id} className={`scenario-step ${isOpen ? "open" : ""}`}>
@@ -519,9 +603,31 @@ function Visualize({
                 </button>
                 {isOpen && (
                   <div className="scenario-detail">
+                    <div className="flow-detail-grid">
+                      <div className="example-box">
+                        <strong>Vai trò/layer:</strong>
+                        <span>{step.role ?? step.module} · {step.layer ?? step.badge}</span>
+                      </div>
+                      <div className="example-box">
+                        <strong>Bước này chạy khi nào:</strong>
+                        <span>{step.trigger ?? step.summary}</span>
+                      </div>
+                      <div className="example-box">
+                        <strong>Input:</strong>
+                        <span>{step.input ?? "Dữ liệu từ bước trước trong luồng hoặc thao tác hiện tại của người dùng/server."}</span>
+                      </div>
+                      <div className="example-box">
+                        <strong>Output:</strong>
+                        <span>{step.output ?? "State/response/event được chuyển sang bước kế tiếp."}</span>
+                      </div>
+                    </div>
                     <div className="example-box">
                       <strong>Ý nghĩa file:</strong>
                       <span>{step.meaning}</span>
+                    </div>
+                    <div className="example-box">
+                      <strong>Vì sao dòng code này quan trọng:</strong>
+                      <span>{step.whyItMatters ?? step.summary}</span>
                     </div>
                     <LineRefList
                       path={step.path}
@@ -531,6 +637,19 @@ function Visualize({
                         explain: note.note,
                       }))}
                     />
+                    <div className="flow-detail-grid">
+                      <div className="example-box">
+                        <strong>Bước kế tiếp:</strong>
+                        <span>{step.nextLinks?.length ? step.nextLinks.join(" -> ") : "Đây là bước cuối của luồng hiện tại."}</span>
+                      </div>
+                      <div className="example-box failure-box">
+                        <strong>Nếu lỗi thì sao:</strong>
+                        <span>{step.failureMode ?? "Luồng dừng ở bước này; cần trace lại response/log và file đang được mở trong Code map."}</span>
+                      </div>
+                    </div>
+                    <button className="ghost-button" type="button" onClick={() => setActivePage("code")}>
+                      Mở Code map và tìm path này
+                    </button>
                     <div className="tag-cloud">
                       {step.links.map((link) => (
                         <code key={link}>{link}</code>
@@ -538,10 +657,13 @@ function Visualize({
                     </div>
                   </div>
                 )}
-                {index < selectedScenario.steps.length - 1 && <i aria-hidden />}
+                {index < filteredScenarioSteps.length - 1 && <i aria-hidden />}
               </article>
             );
           })}
+          {!filteredScenarioSteps.length && (
+            <p className="hint">Không có bước nào khớp filter này trong luồng đang chọn.</p>
+          )}
         </div>
       </div>
 
@@ -751,12 +873,15 @@ function SchedulerReplay() {
       </div>
       <ResponsiveContainer width="100%" height={220}>
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="tick" tick={{ fill: "#475569" }} />
-          <YAxis tick={{ fill: "#475569" }} allowDecimals={false} />
-          <Tooltip />
-          <Line type="monotone" dataKey="due" stroke="#F59E0B" strokeWidth={2} />
-          <Line type="monotone" dataKey="closed" stroke="#22C55E" strokeWidth={2} />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--line)" />
+          <XAxis dataKey="tick" tick={{ fill: "var(--muted)" }} />
+          <YAxis tick={{ fill: "var(--muted)" }} allowDecimals={false} />
+          <Tooltip
+            contentStyle={{ background: "var(--surface)", borderColor: "var(--line)", color: "var(--ink)" }}
+            labelStyle={{ color: "var(--ink)" }}
+          />
+          <Line type="monotone" dataKey="due" stroke="var(--amber)" strokeWidth={2} />
+          <Line type="monotone" dataKey="closed" stroke="var(--green)" strokeWidth={2} />
         </LineChart>
       </ResponsiveContainer>
       <p className="hint">Ý cần nói: scheduler chạy server-side, retry settlement phải idempotent.</p>
@@ -797,6 +922,8 @@ function CodeMap({
       }),
     [extensionFilter, files, layerFilter, moduleFilter, scopeFilter],
   );
+  const hasActiveFilters =
+    moduleFilter !== "all" || layerFilter !== "all" || extensionFilter !== "all" || scopeFilter !== "all" || query.trim();
 
   const layerCounts = visibleFiles.reduce<Record<string, number>>((acc, file) => {
     acc[file.layer] = (acc[file.layer] ?? 0) + 1;
@@ -864,6 +991,19 @@ function CodeMap({
               {label}
             </button>
           ))}
+          <button
+            type="button"
+            className={hasActiveFilters ? "reset-visible" : ""}
+            onClick={() => {
+              setModuleFilter("all");
+              setLayerFilter("all");
+              setExtensionFilter("all");
+              setScopeFilter("all");
+              setQuery("");
+            }}
+          >
+            Reset
+          </button>
         </div>
       </div>
 
@@ -956,6 +1096,9 @@ function Theory({ topics }: { topics: typeof theoryTopics }) {
                   <span>{topic.level}</span>
                   <strong className={statusClass[topic.status]}>{statusLabel[topic.status]}</strong>
                 </div>
+                {topic.category === "Design Principles & Patterns" && (
+                  <span className="principle-badge">Pattern / SOLID / Principle</span>
+                )}
                 <h4>{topic.title}</h4>
                 <p>{topic.summary}</p>
                 <div className="example-box">
@@ -1078,16 +1221,41 @@ function Interview({
   questions: GeneratedQuestion[];
 }) {
   const [bankQuery, setBankQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState<(typeof interviewFilters)[number]>("All");
   const deferredBankQuery = useDeferredValue(bankQuery.trim().toLowerCase());
   const filteredQuestions = useMemo(() => {
-    if (!deferredBankQuery) return questions;
-    return questions.filter((item) =>
-      [item.question, item.answer, item.topic, item.level, item.filePath, ...item.lineRefs.map((ref) => ref.code)]
+    return questions.filter((item) => {
+      const filterMatch =
+        activeFilter === "All" ||
+        item.tags.some((tag) => tag.toLowerCase().includes(activeFilter.toLowerCase())) ||
+        item.topic.toLowerCase().includes(activeFilter.toLowerCase()) ||
+        item.level.toLowerCase().includes(activeFilter.toLowerCase());
+      if (!filterMatch) return false;
+      if (!deferredBankQuery) return true;
+      return [
+        item.question,
+        item.answer,
+        item.intent,
+        item.topic,
+        item.level,
+        item.filePath,
+        ...item.answerBullets,
+        ...item.mustMention,
+        ...item.commonMistakes,
+        ...item.tags,
+        ...item.lineRefs.map((ref) => `${ref.code} ${ref.explain}`),
+      ]
         .join(" ")
         .toLowerCase()
-        .includes(deferredBankQuery),
-    );
-  }, [deferredBankQuery, questions]);
+        .includes(deferredBankQuery);
+    });
+  }, [activeFilter, deferredBankQuery, questions]);
+  const visibleQuestionButtons = useMemo(() => {
+    const currentId = question.id;
+    const topMatches = filteredQuestions.slice(0, 72);
+    if (topMatches.some((item) => item.id === currentId)) return topMatches;
+    return [question, ...topMatches].slice(0, 72);
+  }, [filteredQuestions, question]);
 
   function nextQuestion(delta: number) {
     const next = (questionIndex + delta + questions.length) % questions.length;
@@ -1100,7 +1268,7 @@ function Interview({
       <SectionHeader
         eyebrow="Mock viva"
         title={`Ngân hàng ${questions.length} câu vấn đáp có line code`}
-        text="Câu hỏi được sinh từ file thật, method thật, FXML action và flow thật. Mỗi câu có path, line refs, đáp án mẫu và follow-up để hỏi xoáy."
+        text="Câu hỏi được sinh theo kiểu giảng viên: hỏi luồng, nguyên lý thiết kế, debug, test, role và line code có ngữ cảnh."
       />
 
       <div className="interview-layout">
@@ -1109,12 +1277,48 @@ function Interview({
             <span>{question.level}</span>
             <strong>{question.topic}</strong>
           </div>
+          <div className="tag-row question-tags">
+            {Array.from(new Set(question.tags)).slice(0, 6).map((tag, index) => (
+              <span key={`${tag}-${index}`}>{tag}</span>
+            ))}
+          </div>
           <h2>{question.question}</h2>
+          <div className="rubric-card intent-card">
+            <div>
+              <Sparkles size={18} aria-hidden />
+              <strong>Mục tiêu câu hỏi</strong>
+            </div>
+            <p>{question.intent}</p>
+          </div>
           <div className="example-box">
             <strong>File chính:</strong>
             <span>{question.filePath || "Flow tổng hợp nhiều file"}</span>
           </div>
           <LineRefList refs={question.lineRefs} path={question.filePath} />
+          <div className="rubric-grid">
+            <div className="rubric-card">
+              <div>
+                <ShieldCheck size={18} aria-hidden />
+                <strong>Ý bắt buộc</strong>
+              </div>
+              <ul>
+                {question.mustMention.slice(0, 5).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rubric-card">
+              <div>
+                <TimerReset size={18} aria-hidden />
+                <strong>Follow-up nhanh</strong>
+              </div>
+              <ul>
+                {question.followUps.slice(0, 3).map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
           <div className="quick-actions">
             <button className="primary-button" type="button" onClick={() => setShowAnswer(!showAnswer)}>
               <BookOpen size={18} aria-hidden />
@@ -1131,6 +1335,30 @@ function Interview({
             <div className="answer-box">
               <h3>Đáp án mẫu</h3>
               <p>{question.answer}</p>
+              <div className="answer-rubric">
+                <div>
+                  <h4>Cách trả lời đạt điểm</h4>
+                  <ul>
+                    {question.answerBullets.map((item) => (
+                      <li key={item}>
+                        <CheckCircle2 size={16} aria-hidden />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h4>Sai lầm cần tránh</h4>
+                  <ul>
+                    {question.commonMistakes.map((item) => (
+                      <li key={item}>
+                        <TimerReset size={16} aria-hidden />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           )}
         </div>
@@ -1157,8 +1385,20 @@ function Interview({
               placeholder="Lọc 300 câu theo file/topic..."
             />
           </label>
+          <div className="interview-filter-bar" aria-label="Lọc nhóm câu hỏi vấn đáp">
+            {interviewFilters.map((filter) => (
+              <button
+                key={filter}
+                className={filter === activeFilter ? "active" : ""}
+                type="button"
+                onClick={() => setActiveFilter(filter)}
+              >
+                {filter}
+              </button>
+            ))}
+          </div>
           <div className="question-jump">
-            {filteredQuestions.map((item) => {
+            {visibleQuestionButtons.map((item) => {
               const originalIndex = questions.findIndex((questionItem) => questionItem.id === item.id);
               return (
               <button
@@ -1176,6 +1416,11 @@ function Interview({
               );
             })}
           </div>
+          {filteredQuestions.length > visibleQuestionButtons.length && (
+            <p className="hint question-hint">
+              Đang hiện {visibleQuestionButtons.length}/{filteredQuestions.length} câu phù hợp. Gõ tên file, topic hoặc line code để lọc hẹp hơn.
+            </p>
+          )}
         </div>
       </div>
     </section>
