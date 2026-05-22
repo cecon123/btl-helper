@@ -298,6 +298,7 @@ const scenarioTemplates = {
   ],
   mavenCi: [
     ["common", "MAVEN", "pom.xml parent", "Quản lý Java 21, dependencyManagement và module reactor.", "pom.xml"],
+    ["common", "COMMAND", "mvn clean package", "Chạy từ thư mục gốc để clean target, build common/server/client, chạy test và đóng gói artifact.", "pom.xml"],
     ["server", "MAVEN", "server/pom.xml", "Dependency sqlite, bcrypt, logging, shade/exec server.", "server/pom.xml"],
     ["client", "MAVEN", "client/pom.xml", "Dependency JavaFX/Ikonli/client app.", "client/pom.xml"],
     ["common", "CI", ".github/workflows/maven.yml", "GitHub Actions chạy Maven test/verify.", ".github/workflows/maven.yml"],
@@ -896,6 +897,11 @@ export const dbTables = [
 
 export const mavenModules = [
   {
+    name: "root build",
+    deps: ["mvn clean package", "mvn test", "mvn verify"],
+    purpose: "Chạy tại thư mục gốc để Maven reactor build common -> server/client, xóa target cũ và tạo package mới.",
+  },
+  {
     name: "common",
     deps: ["Gson", "JUnit"],
     purpose: "Model, DTO, enum Role/AuctionStatus, protocol Request/Response/MessageType.",
@@ -1344,8 +1350,8 @@ export const theoryTopics: StudyTopic[] = [
     title: "Maven multi-module và dependency management",
     category: "Build",
     level: "Core",
-    summary: "Parent pom quản lý version; module common/server/client build theo reactor và chia dependency đúng phạm vi.",
-    projectExample: "server phụ thuộc common + sqlite; client phụ thuộc common + javafx, không phụ thuộc sqlite.",
+    summary: "Parent pom quản lý version; module common/server/client build theo reactor và chia dependency đúng phạm vi. Lệnh demo chính là `mvn clean package` chạy tại thư mục gốc.",
+    projectExample: "`mvn clean package` xóa target cũ, build common trước rồi server/client, chạy test và tạo artifact; server phụ thuộc common + sqlite, client phụ thuộc common + javafx.",
     files: ["pom.xml", "server/pom.xml", "client/pom.xml", "common/pom.xml"],
     links: [{ label: "Maven multi-module", url: "https://maven.apache.org/guides/mini/guide-multiple-modules.html" }],
     status: "done",
@@ -1378,7 +1384,7 @@ export const theoryTopics: StudyTopic[] = [
     category: "Team",
     level: "Core",
     summary: "Mỗi thành viên phải biết chạy test/checkstyle trước khi push để tránh hỏng demo chung.",
-    projectExample: "mvn verify chạy test và checkstyle theo parent pom.",
+    projectExample: "`mvn clean package` dùng để kiểm tra build local trước demo; `mvn verify` chạy test và checkstyle theo parent pom.",
     files: [".github/workflows", "pom.xml"],
     links: [{ label: "GitHub Actions Java", url: "https://docs.github.com/actions/automating-builds-and-tests/building-and-testing-java-with-maven" }],
     status: "review",

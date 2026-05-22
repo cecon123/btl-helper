@@ -50,7 +50,7 @@ export type ProjectAudit = {
   note: string;
 };
 
-export const generatedAt = "2026-05-22T08:40:42.508Z";
+export const generatedAt = "2026-05-22T13:52:24.258Z";
 export const projectCodeFiles: GeneratedCodeFile[] = [
   {
     "path": "server/src/main/java/com/auction/server/service/BidService.java",
@@ -13327,7 +13327,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Demo",
     "topic": "Anti-sniping",
     "question": "Nếu thấy yêu cầu demo Anti-sniping, em hãy đi từ màn hình client đến server và database, đồng thời chỉ rõ file nào cần mở.",
-    "answer": "Luồng Anti-sniping: Bid gần cũối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
+    "answer": "Luồng Anti-sniping: Bid gần cuối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
     "intent": "Kiểm tra khả năng demo luồng end-to-end và nói từng layer với code thật.",
     "answerBullets": [
       "Nói thao tác người dùng trên UI đầu tiên.",
@@ -14131,7 +14131,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Anti-sniping",
     "question": "Trong luồng Anti-sniping, đâu là boundary giua UI, protocol, business rule và persistence?",
-    "answer": "Luồng Anti-sniping: Bid gần cũối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
+    "answer": "Luồng Anti-sniping: Bid gần cuối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
     "intent": "Kiểm tra khả năng demo luồng end-to-end và nói từng layer với code thật.",
     "answerBullets": [
       "Nói thao tác người dùng trên UI đầu tiên.",
@@ -14935,7 +14935,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Anti-sniping",
     "question": "Nếu luồng Anti-sniping bị lỗi giữa chừng, em trace từ client sang server theo thứ tự nào?",
-    "answer": "Luồng Anti-sniping: Bid gần cũối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
+    "answer": "Luồng Anti-sniping: Bid gần cuối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
     "intent": "Kiểm tra khả năng demo luồng end-to-end và nói từng layer với code thật.",
     "answerBullets": [
       "Nói thao tác người dùng trên UI đầu tiên.",
@@ -15739,7 +15739,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Demo",
     "topic": "Anti-sniping",
     "question": "Tại sao luồng Anti-sniping không để client thao tác trực tiếp database?",
-    "answer": "Luồng Anti-sniping: Bid gần cũối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
+    "answer": "Luồng Anti-sniping: Bid gần cuối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
     "intent": "Kiểm tra khả năng demo luồng end-to-end và nói từng layer với code thật.",
     "answerBullets": [
       "Nói thao tác người dùng trên UI đầu tiên.",
@@ -16543,7 +16543,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Anti-sniping",
     "question": "Hãy giải thích request/response hoặc realtime event quay về client trong luồng Anti-sniping.",
-    "answer": "Luồng Anti-sniping: Bid gần cũối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
+    "answer": "Luồng Anti-sniping: Bid gần cuối phiên kéo dài endTime và thông báo cho client đang xem. Thứ tự file nên mở: server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionManagerService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Cách trả lời tốt là bắt đầu từ thao tác UI, qua client service/socket, tới request handler/router, service xử lý nghiệp vụ, DAO/DB nếu có, rồi quay về response hoặc realtime event.",
     "intent": "Kiểm tra khả năng demo luồng end-to-end và nói từng layer với code thật.",
     "answerBullets": [
       "Nói thao tác người dùng trên UI đầu tiên.",
@@ -16664,7 +16664,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Client-server boundary",
     "question": "Tại sao thiet ke Client-server boundary phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -16704,7 +16704,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -16721,7 +16721,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "MVC JavaFX",
     "question": "Tại sao thiet ke MVC JavaFX phù hợp với bai đấu giá online của nhóm?",
-    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -16761,7 +16761,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -16778,7 +16778,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Handler-Service-DAO",
     "question": "Tại sao thiet ke Handler-Service-DAO phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -16833,7 +16833,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -16905,7 +16905,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -16922,7 +16922,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Maven multi-module",
     "question": "Tại sao thiet ke Maven multi-module phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Maven multi-module: Parent pom quan lý version; common/server/client tach dependency dùng pham vì. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Maven multi-module: Parent pom quản lý version; common/server/client tách dependency đúng phạm vi. Khi build toàn bộ repo dùng lệnh mvn clean package từ thư mục gốc. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -16935,6 +16935,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Maven",
       "Module",
       "Dependency scope",
+      "mvn clean package",
       "client/dependency-reduced-pom.xml",
       "client/pom.xml"
     ],
@@ -16977,7 +16978,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -16986,7 +16987,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Architecture",
       "Maven",
       "Module",
-      "Dependency scope"
+      "Dependency scope",
+      "mvn clean package"
     ]
   },
   {
@@ -16994,7 +16996,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Separation of concerns",
     "question": "Tại sao thiet ke Separation of concerns phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia vìệc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia việc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17039,7 +17041,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17056,7 +17058,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Transaction boundary",
     "question": "Tại sao thiet ke Transaction boundary phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17096,7 +17098,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17113,7 +17115,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Authorization boundary",
     "question": "Tại sao thiet ke Authorization boundary phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17153,7 +17155,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17170,7 +17172,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Realtime event model",
     "question": "Tại sao thiet ke Realtime event model phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17210,7 +17212,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17227,7 +17229,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Testability by interfaces",
     "question": "Tại sao thiet ke Testability by interfaces phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17282,7 +17284,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17299,7 +17301,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Domain model boundary",
     "question": "Tại sao thiet ke Domain model boundary phù hợp với bai đấu giá online của nhóm?",
-    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17354,7 +17356,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17371,7 +17373,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Client-server boundary",
     "question": "Nếu bỏ Client-server boundary, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17411,7 +17413,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17428,7 +17430,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "MVC JavaFX",
     "question": "Nếu bỏ MVC JavaFX, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17468,7 +17470,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17485,7 +17487,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Handler-Service-DAO",
     "question": "Nếu bỏ Handler-Service-DAO, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17540,7 +17542,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17612,7 +17614,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17629,7 +17631,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Maven multi-module",
     "question": "Nếu bỏ Maven multi-module, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Maven multi-module: Parent pom quan lý version; common/server/client tach dependency dùng pham vì. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Maven multi-module: Parent pom quản lý version; common/server/client tách dependency đúng phạm vi. Khi build toàn bộ repo dùng lệnh mvn clean package từ thư mục gốc. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17642,6 +17644,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Maven",
       "Module",
       "Dependency scope",
+      "mvn clean package",
       "client/dependency-reduced-pom.xml",
       "client/pom.xml"
     ],
@@ -17684,7 +17687,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17693,7 +17696,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Architecture",
       "Maven",
       "Module",
-      "Dependency scope"
+      "Dependency scope",
+      "mvn clean package"
     ]
   },
   {
@@ -17701,7 +17705,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Separation of concerns",
     "question": "Nếu bỏ Separation of concerns, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia vìệc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia việc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17746,7 +17750,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17763,7 +17767,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Transaction boundary",
     "question": "Nếu bỏ Transaction boundary, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17803,7 +17807,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17820,7 +17824,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Authorization boundary",
     "question": "Nếu bỏ Authorization boundary, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17860,7 +17864,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17877,7 +17881,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Realtime event model",
     "question": "Nếu bỏ Realtime event model, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17917,7 +17921,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -17934,7 +17938,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Testability by interfaces",
     "question": "Nếu bỏ Testability by interfaces, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -17989,7 +17993,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18006,7 +18010,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Domain model boundary",
     "question": "Nếu bỏ Domain model boundary, code sẽ khó test hoặc dễ lỗi ở đâu?",
-    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18061,7 +18065,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18078,7 +18082,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Client-server boundary",
     "question": "Hãy chỉ file thể hiện ro nhật Client-server boundary và giải thích trách nhiệm từng layer.",
-    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18118,7 +18122,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18135,7 +18139,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "MVC JavaFX",
     "question": "Hãy chỉ file thể hiện ro nhật MVC JavaFX và giải thích trách nhiệm từng layer.",
-    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18175,7 +18179,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18192,7 +18196,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Handler-Service-DAO",
     "question": "Hãy chỉ file thể hiện ro nhật Handler-Service-DAO và giải thích trách nhiệm từng layer.",
-    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18247,7 +18251,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18319,7 +18323,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18336,7 +18340,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Maven multi-module",
     "question": "Hãy chỉ file thể hiện ro nhật Maven multi-module và giải thích trách nhiệm từng layer.",
-    "answer": "Maven multi-module: Parent pom quan lý version; common/server/client tach dependency dùng pham vì. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Maven multi-module: Parent pom quản lý version; common/server/client tách dependency đúng phạm vi. Khi build toàn bộ repo dùng lệnh mvn clean package từ thư mục gốc. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18349,6 +18353,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Maven",
       "Module",
       "Dependency scope",
+      "mvn clean package",
       "client/dependency-reduced-pom.xml",
       "client/pom.xml"
     ],
@@ -18391,7 +18396,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18400,7 +18405,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Architecture",
       "Maven",
       "Module",
-      "Dependency scope"
+      "Dependency scope",
+      "mvn clean package"
     ]
   },
   {
@@ -18408,7 +18414,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Separation of concerns",
     "question": "Hãy chỉ file thể hiện ro nhật Separation of concerns và giải thích trách nhiệm từng layer.",
-    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia vìệc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia việc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18453,7 +18459,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18470,7 +18476,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Transaction boundary",
     "question": "Hãy chỉ file thể hiện ro nhật Transaction boundary và giải thích trách nhiệm từng layer.",
-    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18510,7 +18516,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18527,7 +18533,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Authorization boundary",
     "question": "Hãy chỉ file thể hiện ro nhật Authorization boundary và giải thích trách nhiệm từng layer.",
-    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18567,7 +18573,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18584,7 +18590,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Realtime event model",
     "question": "Hãy chỉ file thể hiện ro nhật Realtime event model và giải thích trách nhiệm từng layer.",
-    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18624,7 +18630,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18641,7 +18647,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Testability by interfaces",
     "question": "Hãy chỉ file thể hiện ro nhật Testability by interfaces và giải thích trách nhiệm từng layer.",
-    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18696,7 +18702,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18713,7 +18719,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Domain model boundary",
     "question": "Hãy chỉ file thể hiện ro nhật Domain model boundary và giải thích trách nhiệm từng layer.",
-    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18768,7 +18774,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18784,8 +18790,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-94",
     "level": "Kiến trúc",
     "topic": "Client-server boundary",
-    "question": "Client-server boundary giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Client-server boundary giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18825,7 +18831,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18841,8 +18847,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-95",
     "level": "Kiến trúc",
     "topic": "MVC JavaFX",
-    "question": "MVC JavaFX giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "MVC JavaFX giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18882,7 +18888,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18898,8 +18904,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-96",
     "level": "Kiến trúc",
     "topic": "Handler-Service-DAO",
-    "question": "Handler-Service-DAO giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Handler-Service-DAO giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -18954,7 +18960,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -18970,7 +18976,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-97",
     "level": "Defense",
     "topic": "DTO/Protocol",
-    "question": "DTO/Protocol giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
+    "question": "DTO/Protocol giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
     "answer": "DTO/Protocol: DTO và protocol la hop đóng giua client-server, giúp hai module build đọc lập. Trong repo, mở các file common/src/main/java/com/auction/common/dto/auction/CreateAuctionRequest.java -> common/src/main/java/com/auction/common/dto/auction/UpdateAuctionRequest.java -> common/src/main/java/com/auction/common/dto/auth/LoginRequest.java -> common/src/main/java/com/auction/common/dto/auth/LoginResponse.java -> common/src/main/java/com/auction/common/dto/auth/RegisterRequest.java -> common/src/main/java/com/auction/common/dto/auth/RegisterResponse.java -> common/src/main/java/com/auction/common/dto/auth/UpdateUserStatusRequest.java -> common/src/main/java/com/auction/common/dto/bid/PlaceBidRequest.java -> common/src/main/java/com/auction/common/dto/bid/PlaceBidResponse.java -> common/src/main/java/com/auction/common/dto/bid/SetAutoBidRequest.java -> common/src/main/java/com/auction/common/protocol/MessageType.java -> common/src/main/java/com/auction/common/protocol/Request.java...",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
@@ -19026,7 +19032,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19042,8 +19048,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-98",
     "level": "Kiến trúc",
     "topic": "Maven multi-module",
-    "question": "Maven multi-module giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Maven multi-module: Parent pom quan lý version; common/server/client tach dependency dùng pham vì. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Maven multi-module giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Maven multi-module: Parent pom quản lý version; common/server/client tách dependency đúng phạm vi. Khi build toàn bộ repo dùng lệnh mvn clean package từ thư mục gốc. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19056,6 +19062,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Maven",
       "Module",
       "Dependency scope",
+      "mvn clean package",
       "client/dependency-reduced-pom.xml",
       "client/pom.xml"
     ],
@@ -19098,7 +19105,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19107,15 +19114,16 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Architecture",
       "Maven",
       "Module",
-      "Dependency scope"
+      "Dependency scope",
+      "mvn clean package"
     ]
   },
   {
     "id": "Design-99",
     "level": "Kiến trúc",
     "topic": "Separation of concerns",
-    "question": "Separation of concerns giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia vìệc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Separation of concerns giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia việc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19160,7 +19168,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19176,8 +19184,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-100",
     "level": "Kiến trúc",
     "topic": "Transaction boundary",
-    "question": "Transaction boundary giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Transaction boundary giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19217,7 +19225,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19233,8 +19241,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-101",
     "level": "Defense",
     "topic": "Authorization boundary",
-    "question": "Authorization boundary giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Authorization boundary giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19274,7 +19282,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19290,8 +19298,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-102",
     "level": "Kiến trúc",
     "topic": "Realtime event model",
-    "question": "Realtime event model giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Realtime event model giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19331,7 +19339,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19347,8 +19355,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-103",
     "level": "Kiến trúc",
     "topic": "Testability by interfaces",
-    "question": "Testability by interfaces giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Testability by interfaces giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19403,7 +19411,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19419,8 +19427,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Design-104",
     "level": "Kiến trúc",
     "topic": "Domain model boundary",
-    "question": "Domain model boundary giúp thành vìên trong nhóm chia vìệc và bảo vệ vấn đáp như thế nào?",
-    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "question": "Domain model boundary giúp thành viên trong nhóm chia việc và bảo vệ vấn đáp như thế nào?",
+    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19475,7 +19483,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19492,7 +19500,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Client-server boundary",
     "question": "Khi có bug, Client-server boundary giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Client-server boundary: Client chỉ render UI và gui request; server giu quyền xử lý nghiệp vụ và database. Trong repo, mở các file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/socket/SocketClient.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19532,7 +19540,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19549,7 +19557,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "MVC JavaFX",
     "question": "Khi có bug, MVC JavaFX giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "MVC JavaFX: FXML la view, controller xử lý interaction, client service goi server. Trong repo, mở các file client/src/main/java/com/auction/client/controller/AuctionDetailController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> client/src/main/resources/fxml/AuctionDetailView.fxml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19589,7 +19597,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19606,7 +19614,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Handler-Service-DAO",
     "question": "Khi có bug, Handler-Service-DAO giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Handler-Service-DAO: Handler nhận protocol, service xử lý rule, DAO che SQL. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/socket/BidRequestHandler.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19661,7 +19669,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19733,7 +19741,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19750,7 +19758,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Maven multi-module",
     "question": "Khi có bug, Maven multi-module giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Maven multi-module: Parent pom quan lý version; common/server/client tach dependency dùng pham vì. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Maven multi-module: Parent pom quản lý version; common/server/client tách dependency đúng phạm vi. Khi build toàn bộ repo dùng lệnh mvn clean package từ thư mục gốc. Trong repo, mở các file client/dependency-reduced-pom.xml -> client/pom.xml -> common/pom.xml -> pom.xml -> server/dependency-reduced-pom.xml -> server/pom.xml. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19763,6 +19771,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Maven",
       "Module",
       "Dependency scope",
+      "mvn clean package",
       "client/dependency-reduced-pom.xml",
       "client/pom.xml"
     ],
@@ -19805,7 +19814,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19814,7 +19823,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Architecture",
       "Maven",
       "Module",
-      "Dependency scope"
+      "Dependency scope",
+      "mvn clean package"
     ]
   },
   {
@@ -19822,7 +19832,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Separation of concerns",
     "question": "Khi có bug, Separation of concerns giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia vìệc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Separation of concerns: Mới lop giu một vai tro để team để chia việc và test. Trong repo, mở các file server/src/main/java/com/auction/server/service/AuctionService.java -> client/src/main/java/com/auction/client/controller/AuctionListController.java -> client/src/main/java/com/auction/client/service/AuctionClientService.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19867,7 +19877,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19884,7 +19894,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Transaction boundary",
     "question": "Khi có bug, Transaction boundary giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Transaction boundary: Transaction phải bao quanh các update liên quan để tranh trạng thái nua voi. Trong repo, mở các file server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/service/AuctionService.java -> server/src/main/java/com/auction/server/dao/Database.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19924,7 +19934,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19941,7 +19951,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Authorization boundary",
     "question": "Khi có bug, Authorization boundary giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Authorization boundary: Server kiem session/role/owner, UI ẩn nút không du bảo mật. Trong repo, mở các file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/AuthService.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -19981,7 +19991,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -19998,7 +20008,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "Realtime event model",
     "question": "Khi có bug, Realtime event model giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Realtime event model: Server push event cho subscriber thay vì bat client polling lien tuc. Trong repo, mở các file client/src/main/java/com/auction/client/socket/SocketClient.java -> server/src/main/java/com/auction/server/service/NotificationService.java -> common/src/main/java/com/auction/common/dto/bid/BidUpdateEvent.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -20038,7 +20048,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -20055,7 +20065,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Testability by interfaces",
     "question": "Khi có bug, Testability by interfaces giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Testability by interfaces: Service phụ thuộc interface DAO nen test có thể dùng fake/failing DAO. Trong repo, mở các file server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/AutoBidDao.java -> server/src/main/java/com/auction/server/dao/BidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAutoBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -20110,7 +20120,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -20127,7 +20137,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Kiến trúc",
     "topic": "Domain model boundary",
     "question": "Khi có bug, Domain model boundary giúp em khoanh vùng lỗi từ UI đến DB ra sao?",
-    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cũối cùng nói lỗi nào được phòng tránh.",
+    "answer": "Domain model boundary: OOP model mở ta role/item, con DTO dùng để truyen qua mang. Trong repo, mở các file common/src/main/java/com/auction/common/model/Admin.java -> common/src/main/java/com/auction/common/model/Bidder.java -> common/src/main/java/com/auction/common/model/Item.java -> common/src/main/java/com/auction/common/model/Seller.java -> common/src/main/java/com/auction/common/model/User.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Khi trả lời, nói nguyên lý trước, sau đó nối code áp dụng, cuối cùng nói lỗi nào được phòng tránh.",
     "intent": "Kiểm tra hiểu kiến trúc, không chỉ học thuộc tên file.",
     "answerBullets": [
       "Định nghĩa nguyên lý bằng một câu ngắn.",
@@ -20182,7 +20192,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       }
     ],
     "followUps": [
-      "Trong repo có file nào vì phạm nhẹ nguyên lý này không?",
+      "Trong repo có file nào vi phạm nhẹ nguyên lý này không?",
       "Nếu thêm tính năng mới, em sửa layer nào trước?",
       "Nguyên lý này liên quan SOLID nào?"
     ],
@@ -20383,7 +20393,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "DAO/Repository",
     "question": "Project dùng DAO/Repository ở đâu, và no giải quyết vấn đề thiết kế nào?",
-    "answer": "DAO/Repository: DAO interface che SQL, service làm vìệc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
+    "answer": "DAO/Repository: DAO interface che SQL, service làm việc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
     "intent": "Kiểm tra khả năng nhận diện design pattern và SOLID trong code thật.",
     "answerBullets": [
       "Nói ten pattern/principle.",
@@ -20969,7 +20979,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "DAO/Repository",
     "question": "Nếu không dùng DAO/Repository, code sẽ bị lặp hoặc coupling như thế nào?",
-    "answer": "DAO/Repository: DAO interface che SQL, service làm vìệc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
+    "answer": "DAO/Repository: DAO interface che SQL, service làm việc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
     "intent": "Kiểm tra khả năng nhận diện design pattern và SOLID trong code thật.",
     "answerBullets": [
       "Nói ten pattern/principle.",
@@ -21555,7 +21565,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "DAO/Repository",
     "question": "Hãy giải thích DAO/Repository bằng file thật, không chỉ nói định nghĩa sách giáo khoa.",
-    "answer": "DAO/Repository: DAO interface che SQL, service làm vìệc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
+    "answer": "DAO/Repository: DAO interface che SQL, service làm việc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
     "intent": "Kiểm tra khả năng nhận diện design pattern và SOLID trong code thật.",
     "answerBullets": [
       "Nói ten pattern/principle.",
@@ -22141,7 +22151,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "DAO/Repository",
     "question": "DAO/Repository liên quan toi SOLID nào trong project này?",
-    "answer": "DAO/Repository: DAO interface che SQL, service làm vìệc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
+    "answer": "DAO/Repository: DAO interface che SQL, service làm việc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
     "intent": "Kiểm tra khả năng nhận diện design pattern và SOLID trong code thật.",
     "answerBullets": [
       "Nói ten pattern/principle.",
@@ -22727,7 +22737,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Defense",
     "topic": "DAO/Repository",
     "question": "Khi vấn đáp, em sẽ demo DAO/Repository bằng test/file nào?",
-    "answer": "DAO/Repository: DAO interface che SQL, service làm vìệc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
+    "answer": "DAO/Repository: DAO interface che SQL, service làm việc với abstraction thay vì query trực tiếp. File nên mở: server/src/main/java/com/auction/server/dao/AuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteAuctionDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteBidDao.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java -> server/src/main/java/com/auction/server/dao/UserDao.java. Câu trả lời tốt phải nói pattern này làm giảm coupling/tăng testability/tăng khả năng mở rộng ở điểm nào.",
     "intent": "Kiểm tra khả năng nhận diện design pattern và SOLID trong code thật.",
     "answerBullets": [
       "Nói ten pattern/principle.",
@@ -23129,13 +23139,13 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Debug",
     "topic": "race condition khi hai bidder đặt giá",
     "question": "Nếu bug race condition khi hai bidder đặt giá xảy ra trong demo, em trace từ đấu và mong đợi log/file nào thay đổi?",
-    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cũ và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
+    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cu và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
     "intent": "Kiểm tra năng lực debug, không chỉ đọc code thuần túy.",
     "answerBullets": [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "race condition khi hai bidder dat gia",
@@ -23196,7 +23206,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "transaction rollback khi bid persistence fail",
@@ -23252,7 +23262,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "disconnect socket khi dang subscribe",
@@ -23313,7 +23323,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "request sai role",
@@ -23369,7 +23379,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "malformed JSON/request",
@@ -23440,7 +23450,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "stale UI sau realtime event",
@@ -23501,7 +23511,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "scheduler settlement fail",
@@ -23562,7 +23572,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "wallet insufficient funds",
@@ -23618,7 +23628,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "image/asset URL sai",
@@ -23668,13 +23678,13 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Debug",
     "topic": "race condition khi hai bidder đặt giá",
     "question": "Tại sao race condition khi hai bidder đặt giá là lỗi nguy hiểm trong hệ thống đấu giá?",
-    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cũ và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
+    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cu và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
     "intent": "Kiểm tra năng lực debug, không chỉ đọc code thuần túy.",
     "answerBullets": [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "race condition khi hai bidder dat gia",
@@ -23735,7 +23745,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "transaction rollback khi bid persistence fail",
@@ -23791,7 +23801,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "disconnect socket khi dang subscribe",
@@ -23852,7 +23862,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "request sai role",
@@ -23908,7 +23918,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "malformed JSON/request",
@@ -23979,7 +23989,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "stale UI sau realtime event",
@@ -24040,7 +24050,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "scheduler settlement fail",
@@ -24101,7 +24111,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "wallet insufficient funds",
@@ -24157,7 +24167,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "image/asset URL sai",
@@ -24207,13 +24217,13 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Debug",
     "topic": "race condition khi hai bidder đặt giá",
     "question": "Code hiện tại phòng tránh race condition khi hai bidder đặt giá bằng cơ chế nào?",
-    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cũ và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
+    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cu và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
     "intent": "Kiểm tra năng lực debug, không chỉ đọc code thuần túy.",
     "answerBullets": [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "race condition khi hai bidder dat gia",
@@ -24274,7 +24284,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "transaction rollback khi bid persistence fail",
@@ -24330,7 +24340,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "disconnect socket khi dang subscribe",
@@ -24391,7 +24401,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "request sai role",
@@ -24447,7 +24457,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "malformed JSON/request",
@@ -24518,7 +24528,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "stale UI sau realtime event",
@@ -24579,7 +24589,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "scheduler settlement fail",
@@ -24640,7 +24650,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "wallet insufficient funds",
@@ -24696,7 +24706,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "image/asset URL sai",
@@ -24746,13 +24756,13 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Debug",
     "topic": "race condition khi hai bidder đặt giá",
     "question": "Nếu test cho race condition khi hai bidder đặt giá fail, em đọc file nào trước?",
-    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cũ và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
+    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cu và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
     "intent": "Kiểm tra năng lực debug, không chỉ đọc code thuần túy.",
     "answerBullets": [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "race condition khi hai bidder dat gia",
@@ -24813,7 +24823,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "transaction rollback khi bid persistence fail",
@@ -24869,7 +24879,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "disconnect socket khi dang subscribe",
@@ -24930,7 +24940,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "request sai role",
@@ -24986,7 +24996,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "malformed JSON/request",
@@ -25057,7 +25067,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "stale UI sau realtime event",
@@ -25118,7 +25128,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "scheduler settlement fail",
@@ -25179,7 +25189,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "wallet insufficient funds",
@@ -25235,7 +25245,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "image/asset URL sai",
@@ -25285,13 +25295,13 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Debug",
     "topic": "race condition khi hai bidder đặt giá",
     "question": "Hãy đưa ra một cách tái hiện race condition khi hai bidder đặt giá bằng thao tác UI hoặc unit test.",
-    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cũ và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
+    "answer": "race condition khi hai bidder đặt giá: Không lock theo auction có thể làm hai request cùng đọc current price cu và ghi đè nhau. Trace nên mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/main/java/com/auction/server/concurrency/AuctionLockManager.java -> server/src/main/java/com/auction/server/concurrency/LockRegistry.java. Khi trả lời, nói triệu chứng người dùng thay, server/client làm gì, invariant nào phải giữ và test nào bảo vệ.",
     "intent": "Kiểm tra năng lực debug, không chỉ đọc code thuần túy.",
     "answerBullets": [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "race condition khi hai bidder dat gia",
@@ -25352,7 +25362,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "transaction rollback khi bid persistence fail",
@@ -25408,7 +25418,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "disconnect socket khi dang subscribe",
@@ -25469,7 +25479,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "request sai role",
@@ -25525,7 +25535,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "malformed JSON/request",
@@ -25596,7 +25606,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "stale UI sau realtime event",
@@ -25657,7 +25667,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "scheduler settlement fail",
@@ -25718,7 +25728,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "wallet insufficient funds",
@@ -25774,7 +25784,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
       "Mô tả symptom trên UI/server.",
       "Khoanh vung layer nghi ngờ.",
       "Chỉ có che phòng tránh trong code.",
-      "Nói test/manual case tai hien lỗi."
+      "Nói test/manual case tái hiện lỗi."
     ],
     "mustMention": [
       "image/asset URL sai",
@@ -25823,8 +25833,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-206",
     "level": "Demo",
     "topic": "BidServiceConcurrencyTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -25877,8 +25887,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-207",
     "level": "Demo",
     "topic": "BidServiceTransactionTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -25931,8 +25941,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-208",
     "level": "Demo",
     "topic": "RequestRouterAuthorizationTest",
-    "question": "Nếu giảng vìên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -25985,8 +25995,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-209",
     "level": "Demo",
     "topic": "ClientHandlerIntegrationTest",
-    "question": "Nếu giảng vìên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26039,8 +26049,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-210",
     "level": "Demo",
     "topic": "ItemFactoryTest",
-    "question": "Nếu giảng vìên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26093,8 +26103,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-211",
     "level": "Demo",
     "topic": "DAO SQLite tests",
-    "question": "Nếu giảng vìên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26147,8 +26157,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-212",
     "level": "Demo",
     "topic": "Client util tests",
-    "question": "Nếu giảng vìên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26201,8 +26211,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-213",
     "level": "Demo",
     "topic": "BidServiceConcurrencyTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26255,8 +26265,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-214",
     "level": "Demo",
     "topic": "BidServiceTransactionTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26309,8 +26319,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-215",
     "level": "Demo",
     "topic": "RequestRouterAuthorizationTest",
-    "question": "Nếu giảng vìên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26363,8 +26373,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-216",
     "level": "Demo",
     "topic": "ClientHandlerIntegrationTest",
-    "question": "Nếu giảng vìên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26417,8 +26427,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-217",
     "level": "Demo",
     "topic": "ItemFactoryTest",
-    "question": "Nếu giảng vìên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26471,8 +26481,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-218",
     "level": "Demo",
     "topic": "DAO SQLite tests",
-    "question": "Nếu giảng vìên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26525,8 +26535,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-219",
     "level": "Demo",
     "topic": "Client util tests",
-    "question": "Nếu giảng vìên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26579,8 +26589,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-220",
     "level": "Demo",
     "topic": "BidServiceConcurrencyTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26633,8 +26643,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-221",
     "level": "Demo",
     "topic": "BidServiceTransactionTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26687,8 +26697,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-222",
     "level": "Demo",
     "topic": "RequestRouterAuthorizationTest",
-    "question": "Nếu giảng vìên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26741,8 +26751,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-223",
     "level": "Demo",
     "topic": "ClientHandlerIntegrationTest",
-    "question": "Nếu giảng vìên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26795,8 +26805,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-224",
     "level": "Demo",
     "topic": "ItemFactoryTest",
-    "question": "Nếu giảng vìên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26849,8 +26859,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-225",
     "level": "Demo",
     "topic": "DAO SQLite tests",
-    "question": "Nếu giảng vìên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26903,8 +26913,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-226",
     "level": "Demo",
     "topic": "Client util tests",
-    "question": "Nếu giảng vìên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -26957,8 +26967,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-227",
     "level": "Demo",
     "topic": "BidServiceConcurrencyTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27011,8 +27021,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-228",
     "level": "Demo",
     "topic": "BidServiceTransactionTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27065,8 +27075,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-229",
     "level": "Demo",
     "topic": "RequestRouterAuthorizationTest",
-    "question": "Nếu giảng vìên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27119,8 +27129,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-230",
     "level": "Demo",
     "topic": "ClientHandlerIntegrationTest",
-    "question": "Nếu giảng vìên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27173,8 +27183,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-231",
     "level": "Demo",
     "topic": "ItemFactoryTest",
-    "question": "Nếu giảng vìên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27227,8 +27237,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-232",
     "level": "Demo",
     "topic": "DAO SQLite tests",
-    "question": "Nếu giảng vìên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27281,8 +27291,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-233",
     "level": "Demo",
     "topic": "Client util tests",
-    "question": "Nếu giảng vìên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27335,8 +27345,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-234",
     "level": "Demo",
     "topic": "BidServiceConcurrencyTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceConcurrencyTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceConcurrencyTest: Chung minh nhieu bid song song không gay lost update. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java -> server/src/test/java/com/auction/server/service/ConcurrentBidTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27389,8 +27399,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-235",
     "level": "Demo",
     "topic": "BidServiceTransactionTest",
-    "question": "Nếu giảng vìên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test BidServiceTransactionTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "BidServiceTransactionTest: Dùng failing DAO để chứng minh rollback khi persistence fail. Mở file server/src/main/java/com/auction/server/service/BidService.java -> server/src/test/java/com/auction/server/service/BidServiceTransactionTest.java -> server/src/main/java/com/auction/server/dao/Database.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27443,8 +27453,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-236",
     "level": "Demo",
     "topic": "RequestRouterAuthorizationTest",
-    "question": "Nếu giảng vìên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test RequestRouterAuthorizationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "RequestRouterAuthorizationTest: Chung minh server chặn request sai role. Mở file server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java -> server/src/main/java/com/auction/server/service/SessionManager.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27497,8 +27507,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-237",
     "level": "Demo",
     "topic": "ClientHandlerIntegrationTest",
-    "question": "Nếu giảng vìên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ClientHandlerIntegrationTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ClientHandlerIntegrationTest: Test socket integration, subscribe/unsubscribe và response JSON. Mở file server/src/main/java/com/auction/server/socket/ClientHandler.java -> server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java -> server/src/main/java/com/auction/server/service/NotificationService.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27551,8 +27561,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-238",
     "level": "Demo",
     "topic": "ItemFactoryTest",
-    "question": "Nếu giảng vìên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test ItemFactoryTest chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "ItemFactoryTest: Chung minh Factory tạo dùng subclass item. Mở file server/src/test/java/com/auction/server/factory/ItemFactoryTest.java -> common/src/main/java/com/auction/common/enums/ItemType.java -> server/src/main/java/com/auction/server/factory/ItemFactory.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27605,8 +27615,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-239",
     "level": "Demo",
     "topic": "DAO SQLite tests",
-    "question": "Nếu giảng vìên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test DAO SQLite tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "DAO SQLite tests: Kiểm tra SQL mapping với SQLite thật. Mở file server/src/test/java/com/auction/server/dao/sqlite/SQLiteAuctionDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteBidDaoTest.java -> server/src/test/java/com/auction/server/dao/sqlite/SQLiteUserDaoTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27659,8 +27669,8 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "id": "Test-240",
     "level": "Demo",
     "topic": "Client util tests",
-    "question": "Nếu giảng vìên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
-    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cũối cùng.",
+    "question": "Nếu giảng viên hỏi test Client util tests chứng minh điều gì, em sẽ giải thích arrange-act-assert như thế nào?",
+    "answer": "Client util tests: Kiểm tra logic hien thi/timeline/socket phía client. Mở file client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java -> client/src/test/java/com/auction/client/util/AuctionStatusUiTest.java -> client/src/test/java/com/auction/client/util/BidTimelineTest.java. Trả lời theo Arrange-Act-Assert: dữ liệu đầu vào, hành động goi service/socket/DAO, và invariant/assert cuối cùng.",
     "intent": "Kiểm tra khả năng đọc test để bảo vệ behavior, không chỉ chạy lệnh test.",
     "answerBullets": [
       "Nói test setup dữ liệu gi.",
@@ -27714,7 +27724,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Bidder boundary",
     "question": "Với Bidder boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vì, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vi, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -27835,7 +27845,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Admin boundary",
     "question": "Với Admin boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Admin boundary: Admin quan lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Admin boundary: Admin quản lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -28006,7 +28016,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Bidder boundary",
     "question": "Với Bidder boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vì, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vi, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -28127,7 +28137,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Admin boundary",
     "question": "Với Admin boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Admin boundary: Admin quan lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Admin boundary: Admin quản lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -28298,7 +28308,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Bidder boundary",
     "question": "Với Bidder boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vì, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vi, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -28419,7 +28429,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Admin boundary",
     "question": "Với Admin boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Admin boundary: Admin quan lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Admin boundary: Admin quản lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -28590,7 +28600,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Bidder boundary",
     "question": "Với Bidder boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vì, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Bidder boundary: Bidder được xem/đấu giá/nap vi, nhung không được sửa auction cua seller hay admin action. Cần mở server/src/main/java/com/auction/server/service/BidService.java -> server/src/main/java/com/auction/server/socket/RequestRouter.java -> server/src/main/java/com/auction/server/service/WalletService.java -> client/src/main/java/com/auction/client/controller/LiveBiddingController.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -28711,7 +28721,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Hỏi xoáy",
     "topic": "Admin boundary",
     "question": "Với Admin boundary, server phải đảm bảo rule nào để không mất điểm phần role/bảo mật?",
-    "answer": "Admin boundary: Admin quan lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
+    "answer": "Admin boundary: Admin quản lý user/auction và phải bi chặn với token không phải ADMIN. Cần mở server/src/main/java/com/auction/server/socket/RequestRouter.java -> client/src/main/java/com/auction/client/controller/AdminPanelController.java -> server/src/main/java/com/auction/server/socket/AdminRequestHandler.java -> server/src/main/java/com/auction/server/dao/sqlite/SQLiteUserDao.java. Trả lời theo thứ tự: UI có thể ẩn/hien nút, nhưng server mới kiểm token/role/owner và service mới quyết định business rule.",
     "intent": "Kiểm tra khả năng phân biệt UI permission và server authorization.",
     "answerBullets": [
       "Nói role được làm gì.",
@@ -29764,7 +29774,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 76",
     "question": "Vì sao line 76 trong client/src/test/java/com/auction/client/socket/SocketClientIntegrationTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 76: new Request<Vớid>(MessageType.GET_AUCTIONS, null, null, null)). Ý nghĩa: Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của SocketClientIntegrationTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 76: new Request<Vớid>(MessageType.GET_AUCTIONS, null, null, null)). Ý nghĩa: Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của SocketClientIntegrationTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",
@@ -30184,7 +30194,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 171",
     "question": "Vì sao line 171 trong server/src/test/java/com/auction/server/socket/ClientHandlerIntegrationTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 171: private void waitUntil(Condition condition) throws Exception {. Ý nghĩa: Validation hoặc exception path, quyết định lỗi được báo cho client ra sao.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của ClientHandlerIntegrationTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 171: private void waitUntil(Condition condition) throws Exception {. Ý nghĩa: Validation hoặc exception path, quyết định lỗi được báo cho client ra sao.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của ClientHandlerIntegrationTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",
@@ -30226,7 +30236,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 119",
     "question": "Vì sao line 119 trong server/src/test/java/com/auction/server/socket/RequestRouterAuthorizationTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 119: MessageType.GET_DASHBOARD, \"after-logout-dashboard\", bidderToken, null));. Ý nghĩa: Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của RequestRouterAuthorizationTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 119: MessageType.GET_DASHBOARD, \"after-logout-dashboard\", bidderToken, null));. Ý nghĩa: Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của RequestRouterAuthorizationTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",
@@ -30352,7 +30362,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 28",
     "question": "Vì sao line 28 trong server/src/test/java/com/auction/server/service/AuctionManagerServiceTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 28: void setUp() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của AuctionManagerServiceTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 28: void setUp() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của AuctionManagerServiceTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",
@@ -30394,7 +30404,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 142",
     "question": "Vì sao line 142 trong server/src/test/java/com/auction/server/service/AuctionServiceTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 142: void shouldFailUpdateWhenBidsExist() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của AuctionServiceTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 142: void shouldFailUpdateWhenBidsExist() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của AuctionServiceTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",
@@ -30436,7 +30446,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 78",
     "question": "Vì sao line 78 trong server/src/test/java/com/auction/server/service/AuctionSettlementTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 78: void successfulAuctionShouldTransferFunds() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của AuctionSettlementTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 78: void successfulAuctionShouldTransferFunds() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của AuctionSettlementTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",
@@ -30478,7 +30488,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 36",
     "question": "Vì sao line 36 trong server/src/test/java/com/auction/server/service/AuthServiceTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 36: void shouldRegisterSuccessfully() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của AuthServiceTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 36: void shouldRegisterSuccessfully() {. Ý nghĩa: Dòng quan trọng để giải thích trách nhiệm file và luồng chạy.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của AuthServiceTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",
@@ -30520,7 +30530,7 @@ export const generatedQuestions: GeneratedQuestion[] = [
     "level": "Test",
     "topic": "Test line 18",
     "question": "Vì sao line 18 trong server/src/test/java/com/auction/server/service/BidServiceConcurrencyTest.java quan trọng trong luồng chạy, và nếu sửa sai thì rủi ro gì?",
-    "answer": "Line 18: public class BidServiceConcurrencyTest {. Ý nghĩa: Khai báo type chính của file và trách nhiệm lớp.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vì của BidServiceConcurrencyTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
+    "answer": "Line 18: public class BidServiceConcurrencyTest {. Ý nghĩa: Khai báo type chính của file và trách nhiệm lớp.. File này thuộc Test; trách nhiệm chính: JUnit test kiểm chứng hành vi của BidServiceConcurrencyTest.. Trả lời tốt là nói input, output, ai gọi nó, và lỗi sẽ lan ra UI/server/test nào.",
     "intent": "Kiểm tra đọc code có ngữ cảnh, không phải chỉ dịch từng dòng.",
     "answerBullets": [
       "Đọc đúng line và file.",

@@ -841,8 +841,9 @@ function MavenGraph() {
       </div>
       <div className="maven-graph">
         {mavenModules.map((module) => (
-          <article key={module.name}>
+          <article key={module.name} className={module.name === "root build" ? "maven-node maven-root" : "maven-node"}>
             <Boxes size={18} aria-hidden />
+            {module.name === "root build" && <span className="node-eyebrow">root pom + reactor</span>}
             <h4>{module.name}</h4>
             <p>{module.purpose}</p>
             <div className="tag-cloud">
