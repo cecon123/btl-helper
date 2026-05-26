@@ -63,12 +63,14 @@ import {
 import {
   generatedAt,
   generatedManualCases,
-  generatedQuestions,
   projectCodeFiles,
   type GeneratedCodeFile,
   type GeneratedManualCase,
-  type GeneratedQuestion,
 } from "./generatedProjectData";
+import {
+  curatedInterviewQuestions,
+  type CuratedInterviewQuestion,
+} from "./curatedInterviewQuestions";
 
 const nav = [
   { key: "dashboard", label: "Learning Cockpit", icon: GraduationCap, href: "/" },
@@ -103,8 +105,10 @@ const statusClass: Record<StudyStatus, string> = {
 };
 
 const interviewFilters = ["All", "Flow", "Design", "SOLID", "Pattern", "Debug", "Test", "Line code"] as const;
-const flowStepFilters = ["All", "Client", "Socket", "Protocol", "Service", "DAO", "Realtime", "Test"] as const;
+const flowStepFilters = ["All", "Client", "UI", "Socket", "Protocol", "Service", "DAO", "Realtime", "Test", "Build"] as const;
 type ThemeMode = "light" | "dark";
+type ScenarioFlowItem = (typeof scenarioFlows)[number];
+type ScenarioStepItem = ScenarioFlowItem["steps"][number];
 
 export default function LearningApp({ page }: { page: PageKey }) {
   const router = useRouter();
@@ -129,7 +133,7 @@ export default function LearningApp({ page }: { page: PageKey }) {
 
   const deferredQuery = useDeferredValue(query.trim().toLowerCase());
   const currentRole = rolePaths.find((item) => item.role === role)!;
-  const currentQuestion = generatedQuestions[questionIndex] ?? generatedQuestions[0];
+  const currentQuestion = curatedInterviewQuestions[questionIndex] ?? curatedInterviewQuestions[0];
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
@@ -252,7 +256,7 @@ export default function LearningApp({ page }: { page: PageKey }) {
             setQuestionIndex={setQuestionIndex}
             showAnswer={showAnswer}
             setShowAnswer={setShowAnswer}
-            questions={generatedQuestions}
+            questions={curatedInterviewQuestions}
           />
         )}
       </main>
@@ -337,7 +341,7 @@ function Dashboard({
           </p>
           <div className="coverage-strip">
             <span><strong>{projectCodeFiles.length}</strong> file repo</span>
-            <span><strong>{generatedQuestions.length}</strong> câu vấn đáp</span>
+            <span><strong>{curatedInterviewQuestions.length}</strong> câu vấn đáp LLM-curated</span>
             <span><strong>{generatedManualCases.length}</strong> manual UI case</span>
             <span><strong>{new Date(generatedAt).toLocaleDateString("vi-VN")}</strong> ngày index</span>
           </div>
@@ -517,6 +521,121 @@ function Roles({
   );
 }
 
+function buildScenarioGuide(flow: ScenarioFlowItem) {
+  const moduleLabels: Record<ScenarioStepItem["module"], string> = {
+    client: "client/UI",
+    common: "common DTO/protocol",
+    server: "server",
+  };
+  const modules = uniqueSorted(flow.steps.map((step) => moduleLabels[step.module]));
+  const fileOrder = flow.steps.map((step) => step.path).filter((path, index, arr) => arr.indexOf(path) === index).slice(0, 7);
+  const serverSteps = flow.steps.filter((step) => step.module === "server").length;
+  const clientSteps = flow.steps.filter((step) => step.module === "client").length;
+  const hasCommon = flow.steps.some((step) => step.module === "common");
+
+  return {
+    narrative: `Bắt đầu bằng thao tác hoặc trigger của luồng, đi tuần tự qua ${modules.join(" -> ")}, rồi kết thúc bằng state/response/event mà người dùng nhìn thấy. Với luồng này có ${clientSteps} bước client, ${serverSteps} bước server${hasCommon ? " và contract common ở giữa" : ""}; khi nói cần chỉ rõ bước nào chỉ phục vụ UX, bước nào mới là nguồn sự thật nghiệp vụ.`,
+    fileOrder,
+    invariants: scenarioInvariants(flow),
+  };
+}
+
+function scenarioInvariants(flow: ScenarioFlowItem) {
+  const haystack = [flow.id, flow.title, flow.subtitle, ...flow.steps.flatMap((step) => [step.badge, step.title, step.summary, step.path])]
+    .join(" ")
+    .toLowerCase();
+  const invariants: string[] = [];
+
+  if (/bid|wallet|settlement|auto|sniping|auction/.test(haystack)) {
+    invariants.push("Không được để giá, winner, lockedBalance hoặc trạng thái auction lệch nhau.");
+  }
+  if (/auth|login|register|logout|authorization|admin|seller/.test(haystack)) {
+    invariants.push("Client có thể ẩn/hiện menu, nhưng token/role/owner phải được kiểm ở server.");
+  }
+  if (/socket|realtime|notification|event|disconnect/.test(haystack)) {
+    invariants.push("Event realtime phải đi sau state hợp lệ và client phải xử lý lỗi/mất kết nối rõ ràng.");
+  }
+  if (/dao|database|sqlite|schema|transaction/.test(haystack)) {
+    invariants.push("DAO chỉ map SQL/persistence; business rule và transaction boundary không được rơi vào UI.");
+  }
+  if (/maven|ci|test|demo/.test(haystack)) {
+    invariants.push("Mọi khẳng định khi demo nên có test, command hoặc manual case làm bằng chứng.");
+  }
+
+  invariants.push("Khi trả lời, luôn nói input -> xử lý -> output -> lỗi nếu bước này sai.");
+  return Array.from(new Set(invariants)).slice(0, 4);
+}
+
+function buildStepStudyDetails(step: ScenarioStepItem, flow: ScenarioFlowItem, index: number) {
+  const previous = flow.steps[index - 1];
+  const next = flow.steps[index + 1];
+  const layerRule = layerRuleForStep(step);
+  const proof = proofForStep(step);
+  const script = `${step.title} là bước ${step.order} trong ${flow.label}. Input của bước này là ${step.input ?? "dữ liệu từ bước trước"}, nó chạy ở ${step.role ?? step.module} và nằm tại ${step.path}. Khi mở file, nói trước trách nhiệm: ${step.summary} Sau đó chỉ 1-2 line refs để chứng minh code thật, rồi nối sang ${next ? next.title : "kết quả cuối của flow"}. ${layerRule}`;
+
+  return {
+    script,
+    checklist: [
+      `Nêu trigger: ${step.trigger ?? "bước trước gọi sang hoặc user thao tác."}`,
+      `Nêu input/output: ${step.input ?? "input từ flow"} -> ${step.output ?? "output sang bước kế tiếp"}.`,
+      `Mở file ${step.path} và chỉ line refs chính.`,
+      `Nối với ${previous ? `bước trước: ${previous.title}` : "điểm bắt đầu flow"} và ${next ? `bước sau: ${next.title}` : "điểm kết thúc flow"}.`,
+    ],
+    debug: [
+      `Nếu lỗi, kiểm trước bước này có nhận đúng dữ liệu từ ${previous?.title ?? "UI/trigger"} không.`,
+      step.failureMode ?? "Đối chiếu log/response/state để biết flow dừng ở layer nào.",
+      `Sau khi sửa, chạy lại demo/test liên quan tới ${flow.label}.`,
+    ],
+    demo: [
+      proof,
+      `Manual demo: thao tác tới ${flow.label}, dừng ở bước ${step.order} và đọc state/response hiển thị.`,
+      `Nếu có test, đọc theo Arrange-Act-Assert thay vì chỉ nói tên file.`,
+    ],
+    questions: [
+      `Nếu bỏ bước ${step.title} thì flow ${flow.label} hỏng ở đâu?`,
+      `Bước này thuộc UX, protocol, business rule hay persistence? Vì sao?`,
+      `Lỗi ở đây sẽ hiện ra UI, response hay database như thế nào?`,
+    ],
+  };
+}
+
+function layerRuleForStep(step: ScenarioStepItem) {
+  const haystack = [step.badge, step.layer, step.path, step.summary].join(" ").toLowerCase();
+  if (/fxml|controller|ui|javafx|scene|shell/.test(haystack)) {
+    return "Nhấn mạnh đây là lớp trình bày/điều hướng: validate nhanh và cập nhật UI, nhưng không quyết định rule bảo mật hoặc ghi DB trực tiếp.";
+  }
+  if (/dto|protocol|message|request|response/.test(haystack)) {
+    return "Nhấn mạnh đây là contract: client và server phải cùng hiểu field, MessageType và format JSON.";
+  }
+  if (/router|handler|session|auth/.test(haystack)) {
+    return "Nhấn mạnh đây là cổng server: kiểm token/role, parse payload và chỉ dispatch khi request hợp lệ.";
+  }
+  if (/service|rule|lock|scheduler|factory/.test(haystack)) {
+    return "Nhấn mạnh đây là nơi business rule sống: kiểm invariant, transaction, concurrency và gọi DAO/helper đúng thứ tự.";
+  }
+  if (/dao|sql|schema|sqlite|database/.test(haystack)) {
+    return "Nhấn mạnh đây là persistence boundary: SQL/mapping phải đúng, nhưng không tự quyết định rule nghiệp vụ.";
+  }
+  if (/event|notification|realtime|socket/.test(haystack)) {
+    return "Nhấn mạnh event/socket chỉ phát sau khi state hợp lệ, và client cần cập nhật UI trên đúng thread.";
+  }
+  if (/test|ci|maven|pom/.test(haystack)) {
+    return "Nhấn mạnh đây là bằng chứng chất lượng: command/test chứng minh flow không chỉ chạy bằng cảm tính.";
+  }
+  return "Nhấn mạnh trách nhiệm đơn của bước này và không trộn nó với layer khác.";
+}
+
+function proofForStep(step: ScenarioStepItem) {
+  const haystack = [step.badge, step.layer, step.path, step.summary].join(" ").toLowerCase();
+  if (/test/.test(haystack)) return `Automated test: mở ${step.path} và đọc Arrange-Act-Assert.`;
+  if (/dao|sql|schema|sqlite/.test(haystack)) return "Bằng chứng: DAO test hoặc dữ liệu SQLite sau thao tác phải khớp DTO/UI.";
+  if (/service|lock|transaction|scheduler|wallet|bid/.test(haystack)) return "Bằng chứng: service test/concurrency test/transaction test hoặc demo nhiều client.";
+  if (/socket|handler|router|protocol|dto/.test(haystack)) return "Bằng chứng: request/response có MessageType đúng và server log vào handler đúng.";
+  if (/fxml|controller|ui|javafx/.test(haystack)) return "Bằng chứng: click UI tạo đúng request và notification/state hiển thị đúng.";
+  if (/maven|pom|ci/.test(haystack)) return "Bằng chứng: `mvn clean verify` hoặc workflow CI pass.";
+  return "Bằng chứng: mở line refs trong Code map và chạy manual case tương ứng.";
+}
+
 function Visualize({
   lockMode,
   setLockMode,
@@ -536,12 +655,23 @@ function Visualize({
 }) {
   const selectedScenario = scenarioFlows.find((flow) => flow.id === scenarioId) ?? scenarioFlows[0];
   const [flowFilter, setFlowFilter] = useState<(typeof flowStepFilters)[number]>("All");
+  const visualizeStats = useMemo(() => {
+    const allSteps = scenarioFlows.flatMap((flow) => flow.steps);
+    return {
+      steps: allSteps.length,
+      files: new Set(allSteps.map((step) => step.path)).size,
+    };
+  }, []);
+  const scenarioGuide = useMemo(() => buildScenarioGuide(selectedScenario), [selectedScenario]);
   const filteredScenarioSteps = useMemo(() => {
     if (flowFilter === "All") return selectedScenario.steps;
     const needle = flowFilter.toLowerCase();
-    return selectedScenario.steps.filter((step) =>
-      [step.badge, step.layer, step.role, step.path, step.title].join(" ").toLowerCase().includes(needle),
-    );
+    return selectedScenario.steps.filter((step) => {
+      const haystack = [step.badge, step.layer, step.role, step.path, step.title, step.summary].join(" ").toLowerCase();
+      if (flowFilter === "Build") return /maven|pom|ci|workflow|build|command|properties|schema|sql/.test(haystack);
+      if (flowFilter === "UI") return /ui|fxml|controller|css|shell|scene|motion|toast|javafx/.test(haystack);
+      return haystack.includes(needle);
+    });
   }, [flowFilter, selectedScenario.steps]);
 
   return (
@@ -586,6 +716,49 @@ function Visualize({
             </button>
           ))}
         </div>
+        <div className="visual-coverage-grid" aria-label="Độ phủ visualize">
+          <span><strong>{scenarioFlows.length}</strong> luồng</span>
+          <span><strong>{visualizeStats.steps}</strong> bước</span>
+          <span><strong>{visualizeStats.files}</strong> file neo</span>
+          <span><strong>{generatedManualCases.length}</strong> manual UI case</span>
+        </div>
+        <div className="coverage-checklist">
+          {[
+            "Auth/register/logout",
+            "Bidder bid, auto-bid, anti-sniping",
+            "Seller create/update/dashboard",
+            "Admin user/auction",
+            "Wallet/settlement",
+            "Realtime/socket/disconnect",
+            "Database/DAO",
+            "Maven/CI/Java 25",
+            "UI polish/toast/UiMotion",
+          ].map((item) => (
+            <span key={item}><CheckCircle2 size={14} aria-hidden />{item}</span>
+          ))}
+        </div>
+        <div className="scenario-learning-grid" aria-label="Hướng dẫn học luồng đang chọn">
+          <article className="scenario-brief-card">
+            <span>Cách kể 90 giây</span>
+            <p>{scenarioGuide.narrative}</p>
+          </article>
+          <article className="scenario-brief-card">
+            <span>File cần mở theo thứ tự</span>
+            <ol>
+              {scenarioGuide.fileOrder.map((file) => (
+                <li key={file}>{file}</li>
+              ))}
+            </ol>
+          </article>
+          <article className="scenario-brief-card risk-brief">
+            <span>Invariant/rủi ro phải nói</span>
+            <ul>
+              {scenarioGuide.invariants.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
         <div className="scenario-heading">
           <h3>{selectedScenario.title}</h3>
           <p>{selectedScenario.subtitle}</p>
@@ -593,6 +766,7 @@ function Visualize({
         <div className="scenario-steps">
           {filteredScenarioSteps.map((step, index) => {
             const isOpen = expandedScenarioStep === step.id;
+            const studyDetails = buildStepStudyDetails(step, selectedScenario, index);
             return (
               <article key={step.id} className={`scenario-step ${isOpen ? "open" : ""}`}>
                 <button type="button" onClick={() => setExpandedScenarioStep(isOpen ? "" : step.id)}>
@@ -629,6 +803,36 @@ function Visualize({
                       <strong>Vì sao dòng code này quan trọng:</strong>
                       <span>{step.whyItMatters ?? step.summary}</span>
                     </div>
+                    <div className="step-study-card">
+                      <span>Cách nói khi mở bước này</span>
+                      <p>{studyDetails.script}</p>
+                    </div>
+                    <div className="step-study-columns">
+                      <div>
+                        <h4>Checklist trả lời</h4>
+                        <ul>
+                          {studyDetails.checklist.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4>Trace debug</h4>
+                        <ul>
+                          {studyDetails.debug.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div>
+                        <h4>Test/demo cần nhắc</h4>
+                        <ul>
+                          {studyDetails.demo.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
                     <LineRefList
                       path={step.path}
                       refs={step.codeNotes.map((note) => ({
@@ -646,6 +850,14 @@ function Visualize({
                         <strong>Nếu lỗi thì sao:</strong>
                         <span>{step.failureMode ?? "Luồng dừng ở bước này; cần trace lại response/log và file đang được mở trong Code map."}</span>
                       </div>
+                    </div>
+                    <div className="step-viva-list">
+                      <strong>Câu hỏi giảng viên có thể xoáy:</strong>
+                      <ul>
+                        {studyDetails.questions.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
                     </div>
                     <button className="ghost-button" type="button" onClick={() => setActivePage("code")}>
                       Mở Code map và tìm path này
@@ -1017,38 +1229,171 @@ function CodeMap({
       </div>
 
       <div className="file-grid">
-        {visibleFiles.map((file) => (
-          <article key={file.path} className="panel file-card">
-            <div className="file-head">
-              <span>{file.layer}</span>
-              <strong>{file.lineCount} dòng</strong>
-            </div>
-            <h3>{file.path}</h3>
-            <p>{file.summary}</p>
-            <h4>Line refs cần mở khi bị hỏi</h4>
-            <LineRefList refs={file.importantLines.slice(0, 8)} path={file.path} />
-            <div className="file-meta">
-              <div>
-                <span>Declarations</span>
-                {file.declarations.slice(0, 4).map((item) => (
-                  <code key={`${item.line}-${item.name}`}>L{item.line} {item.kind} {item.name}</code>
-                ))}
+        {visibleFiles.map((file) => {
+          const guide = buildFileStudyGuide(file);
+          return (
+            <article key={file.path} className="panel file-card">
+              <div className="file-head">
+                <span>{file.layer}</span>
+                <strong>{file.lineCount} dòng</strong>
               </div>
-              <div>
-                <span>Methods / actions</span>
-                {[
-                  ...file.methods.slice(0, 5).map((item) => `L${item.line} ${item.name}()`),
-                  ...(file.fxml?.actions.slice(0, 5).map((item) => `L${item.line} #${item.action}`) ?? []),
-                ].map((item) => (
-                  <code key={item}>{item}</code>
-                ))}
+              <h3>{file.path}</h3>
+              <p>{file.summary}</p>
+              <div className="file-study-guide">
+                <div>
+                  <strong>Vai trò file</strong>
+                  <p>{guide.role}</p>
+                </div>
+                <div>
+                  <strong>Khi vấn đáp cần nói</strong>
+                  <p>{guide.viva}</p>
+                </div>
+                <div>
+                  <strong>Rủi ro nếu sửa sai</strong>
+                  <p>{guide.risk}</p>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
+              <ul className="file-study-checklist">
+                {guide.checklist.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              {guide.related.length > 0 && (
+                <div className="tag-cloud file-related">
+                  {guide.related.map((item) => (
+                    <code key={item}>{item}</code>
+                  ))}
+                </div>
+              )}
+              <h4>Line refs cần mở khi bị hỏi</h4>
+              <LineRefList refs={file.importantLines.slice(0, 8)} path={file.path} />
+              <div className="file-meta">
+                <div>
+                  <span>Declarations</span>
+                  {file.declarations.slice(0, 4).map((item) => (
+                    <code key={`${item.line}-${item.name}`}>L{item.line} {item.kind} {item.name}</code>
+                  ))}
+                </div>
+                <div>
+                  <span>Methods / actions</span>
+                  {[
+                    ...file.methods.slice(0, 5).map((item) => `L${item.line} ${item.name}()`),
+                    ...(file.fxml?.actions.slice(0, 5).map((item) => `L${item.line} #${item.action}`) ?? []),
+                  ].map((item) => (
+                    <code key={item}>{item}</code>
+                  ))}
+                </div>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
   );
+}
+
+function buildFileStudyGuide(file: GeneratedCodeFile) {
+  const pathParts = file.path.split("/");
+  const base = pathParts[pathParts.length - 1] ?? file.path;
+  const methods = file.methods.slice(0, 3).map((method) => `${method.name}()`);
+  const actions = file.fxml?.actions.slice(0, 3).map((action) => `#${action.action}`) ?? [];
+  const anchors = [...methods, ...actions];
+  const related = Array.from(
+    new Set(
+      scenarioFlows
+        .flatMap((flow) => flow.steps)
+        .filter((step) => step.path === file.path || step.links.includes(file.path))
+        .map((step) => step.title),
+    ),
+  ).slice(0, 5);
+
+  if (base === "UiMotion.java") {
+    return {
+      role: "Tách toàn bộ micro-animation của button ra khỏi controller, được SceneManager cài sau khi load FXML.",
+      viva: "Nói rõ helper chỉ thay đổi style/effect/scale cho hover, press và focus-visible; không thay onAction nên không ảnh hưởng nghiệp vụ.",
+      risk: "Animation bám trạng thái, làm nút khó bấm hoặc vô tình phá handler nếu code can thiệp event không đúng.",
+      checklist: ["Mở SceneManager để chỉ nơi gọi UiMotion.", "Mở common.css/shell.css để chỉ class button được polish.", "Nhấn mạnh đây là UI polish, không phải business rule."],
+      related,
+    };
+  }
+
+  if (base === "NotificationManager.java") {
+    return {
+      role: "Điểm tập trung hiển thị toast trong app và biến event realtime thành feedback người dùng.",
+      viva: "Nối từ SYSTEM_NOTIFICATION/BID_UPDATE/TIME_EXTENDED/AUCTION_CLOSED tới toastHost trong AppShellController.",
+      risk: "Server xử lý đúng nhưng user không thấy thông báo, hoặc cập nhật UI sai thread gây lỗi JavaFX.",
+      checklist: ["Chỉ ra listener event socket.", "Chỉ ra Platform.runLater/UI thread.", "Chỉ ra toast có progress line và xếp chồng."],
+      related,
+    };
+  }
+
+  if (file.layer === "JavaFX Controller") {
+    return {
+      role: `Controller nhận thao tác của màn ${base.replace("Controller.java", "")}, validate nhanh và gọi client service.`,
+      viva: `Bắt đầu từ FXML onAction/fx:id, rồi nói các method chính ${anchors.join(", ") || "initialize/handler"} gọi service nào.`,
+      risk: "UI có thể không phản hồi, gửi request sai payload hoặc cập nhật JavaFX state sai thread.",
+      checklist: ["Nêu input người dùng.", "Nêu client service/socket được gọi.", "Nêu response/event cập nhật view ra sao."],
+      related,
+    };
+  }
+
+  if (file.layer === "FXML View") {
+    return {
+      role: "View khai báo layout, control, fx:id và onAction để nối sang controller JavaFX.",
+      viva: `Chỉ controller của FXML và các action ${anchors.join(", ") || "được khai báo trong view"}.`,
+      risk: "Sai fx:id/onAction làm controller không nhận được control hoặc click không chạy.",
+      checklist: ["Chỉ fx:controller.", "Chỉ button/control người dùng thao tác.", "Nối sang controller tương ứng."],
+      related,
+    };
+  }
+
+  if (file.layer.includes("Service")) {
+    return {
+      role: "Nơi xử lý rule nghiệp vụ, transaction, lock, notification hoặc orchestration giữa DAO/service khác.",
+      viva: `Nói invariant file bảo vệ và method chính ${anchors.join(", ") || "được line refs liệt kê"}.`,
+      risk: "Business rule bị phá: bid sai, quyền sai, ví sai, trạng thái auction sai hoặc event gửi nhầm.",
+      checklist: ["Nêu input từ handler.", "Nêu DAO/service được gọi.", "Nêu test bảo vệ behavior."],
+      related,
+    };
+  }
+
+  if (file.layer.includes("DAO") || file.layer.includes("SQLite")) {
+    return {
+      role: "Boundary persistence: map giữa domain/DTO và SQLite query/update.",
+      viva: "Nói bảng/cột liên quan, query chính và vì sao service không viết SQL trực tiếp.",
+      risk: "Dữ liệu DB sai, mapping lệch DTO/model hoặc transaction rollback không đúng.",
+      checklist: ["Nêu table tác động.", "Nêu method query/update.", "Nêu DAO test tương ứng."],
+      related,
+    };
+  }
+
+  if (file.layer.includes("Socket") || file.layer.includes("Handler") || file.layer === "Protocol") {
+    return {
+      role: "Boundary client-server: nhận/gửi MessageType, Request/Response hoặc event realtime.",
+      viva: "Nói message type, token/session, payload DTO và handler/service kế tiếp.",
+      risk: "Client/server lệch contract, route nhầm quyền hoặc event không tới subscriber.",
+      checklist: ["Nêu MessageType.", "Nêu DTO payload.", "Nêu role/session check nếu có."],
+      related,
+    };
+  }
+
+  if (file.layer === "Client Utility") {
+    return {
+      role: "Utility dùng chung phía JavaFX client để controller không lặp logic phụ trợ.",
+      viva: `Nói file này phục vụ controller nào và method chính ${anchors.join(", ") || "trong line refs"}.`,
+      risk: "Lỗi lan sang nhiều màn vì utility được dùng lại ở nhiều controller.",
+      checklist: ["Nêu controller sử dụng.", "Nêu input/output của utility.", "Nêu case UI cần test lại."],
+      related,
+    };
+  }
+
+  return {
+    role: `File thuộc layer ${file.layer}, dùng trong module ${file.module}.`,
+    viva: "Dựa vào summary, declarations, methods/actions và line refs để nói trách nhiệm, ai gọi file này và output là gì.",
+    risk: "Sửa sai có thể làm đứt flow liên quan hoặc khiến câu trả lời vấn đáp không nối được layer.",
+    checklist: ["Nêu layer.", "Nêu method/action chính.", "Nêu file trước và file sau trong flow."],
+    related,
+  };
 }
 
 function uniqueSorted(values: string[]) {
@@ -1069,6 +1414,38 @@ function LineRefList({ refs, path }: { refs: { line: number; code: string; expla
           <p>{ref.explain}</p>
         </div>
       ))}
+    </div>
+  );
+}
+
+function FormattedAnswer({ text }: { text: string }) {
+  const blocks = text
+    .trim()
+    .split(/\n\s*\n/)
+    .map((block) => block.trim())
+    .filter(Boolean);
+
+  return (
+    <div className="formatted-answer">
+      {blocks.map((block, index) => {
+        const lines = block
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean);
+        const allBullets = lines.length > 1 && lines.every((line) => /^[-*]\s+/.test(line));
+
+        if (allBullets) {
+          return (
+            <ul key={`${index}-${lines[0]}`}>
+              {lines.map((line) => (
+                <li key={line}>{line.replace(/^[-*]\s+/, "")}</li>
+              ))}
+            </ul>
+          );
+        }
+
+        return <p key={`${index}-${block.slice(0, 32)}`}>{lines.join(" ")}</p>;
+      })}
     </div>
   );
 }
@@ -1214,12 +1591,12 @@ function Interview({
   setShowAnswer,
   questions,
 }: {
-  question: GeneratedQuestion;
+  question: CuratedInterviewQuestion;
   questionIndex: number;
   setQuestionIndex: (index: number) => void;
   showAnswer: boolean;
   setShowAnswer: (value: boolean) => void;
-  questions: GeneratedQuestion[];
+  questions: CuratedInterviewQuestion[];
 }) {
   const [bankQuery, setBankQuery] = useState("");
   const [activeFilter, setActiveFilter] = useState<(typeof interviewFilters)[number]>("All");
@@ -1252,11 +1629,18 @@ function Interview({
     });
   }, [activeFilter, deferredBankQuery, questions]);
   const visibleQuestionButtons = useMemo(() => {
-    const currentId = question.id;
-    const topMatches = filteredQuestions.slice(0, 72);
-    if (topMatches.some((item) => item.id === currentId)) return topMatches;
-    return [question, ...topMatches].slice(0, 72);
-  }, [filteredQuestions, question]);
+    return filteredQuestions;
+  }, [filteredQuestions]);
+
+  useEffect(() => {
+    if (!filteredQuestions.length) return;
+    if (filteredQuestions.some((item) => item.id === question.id)) return;
+    const nextIndex = questions.findIndex((item) => item.id === filteredQuestions[0].id);
+    if (nextIndex >= 0) {
+      setQuestionIndex(nextIndex);
+      setShowAnswer(false);
+    }
+  }, [filteredQuestions, question.id, questions, setQuestionIndex, setShowAnswer]);
 
   function nextQuestion(delta: number) {
     const next = (questionIndex + delta + questions.length) % questions.length;
@@ -1268,8 +1652,8 @@ function Interview({
     <section className="page-stack">
       <SectionHeader
         eyebrow="Mock viva"
-        title={`Ngân hàng ${questions.length} câu vấn đáp có line code`}
-        text="Câu hỏi được sinh theo kiểu giảng viên: hỏi luồng, nguyên lý thiết kế, debug, test, role và line code có ngữ cảnh."
+        title={`Ngân hàng ${questions.length} câu vấn đáp LLM-curated có line code`}
+        text="Câu hỏi và đáp án được viết lại theo kiểu học vấn đáp: nói luồng, mở file thật, giải thích tradeoff, nêu lỗi dễ sai và test/demo cần chứng minh."
       />
 
       <div className="interview-layout">
@@ -1335,7 +1719,7 @@ function Interview({
           {showAnswer && (
             <div className="answer-box">
               <h3>Đáp án mẫu</h3>
-              <p>{question.answer}</p>
+              <FormattedAnswer text={question.answer} />
               <div className="answer-rubric">
                 <div>
                   <h4>Cách trả lời đạt điểm</h4>
@@ -1417,11 +1801,10 @@ function Interview({
               );
             })}
           </div>
-          {filteredQuestions.length > visibleQuestionButtons.length && (
-            <p className="hint question-hint">
-              Đang hiện {visibleQuestionButtons.length}/{filteredQuestions.length} câu phù hợp. Gõ tên file, topic hoặc line code để lọc hẹp hơn.
-            </p>
-          )}
+          <p className="hint question-hint">
+            Đang hiện {visibleQuestionButtons.length}/{filteredQuestions.length} câu phù hợp
+            {activeFilter === "All" && !deferredBankQuery ? ` trên tổng ${questions.length} câu.` : ". Gõ tên file, topic hoặc line code để lọc hẹp hơn."}
+          </p>
         </div>
       </div>
     </section>

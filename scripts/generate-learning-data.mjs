@@ -98,6 +98,17 @@ function summaryFor(relativePath, layer, lines) {
   const base = path.basename(relativePath);
   const name = base.replace(/\.(java|fxml|css|xml|properties|sql|md|json|ya?ml)$/i, "");
   const joined = lines.slice(0, 80).join(" ");
+  if (base === "UiMotion.java") return "Utility cài micro-animation tập trung cho button JavaFX sau khi FXML được load, giúp polish UI mà không đổi onAction/handler.";
+  if (base === "NotificationManager.java") return "Utility hiển thị toast trong cửa sổ app và lắng nghe event realtime để báo lỗi/thành công, time extended, auction closed hoặc system notification.";
+  if (base === "SceneManager.java") return "Utility điều hướng màn hình JavaFX, giữ shell/current user và gọi các hook UI như UiMotion sau khi load FXML.";
+  if (base === "ImageUrlUtil.java") return "Utility chuẩn hóa URL ảnh upload để JavaFX client tải đúng asset từ HTTP asset server.";
+  if (base === "BidTimeline.java") return "Utility biến lịch sử bid thành dữ liệu timeline/chart để giải thích diễn biến giá realtime.";
+  if (base === "PriceChartManager.java") return "Utility quản lý chart giá trong live bidding, tách render chart khỏi controller nghiệp vụ.";
+  if (base === "AuctionStatusUi.java") return "Utility map AuctionStatus sang label/CSS class nhất quán trên các màn JavaFX.";
+  if (base === "GlobalExceptionHandler.java") return "Utility bắt lỗi bất ngờ phía client để UI không crash im lặng và user có thông báo rõ.";
+  if (base === "FileUtil.java") return "Utility chọn, kiểm tra và chuẩn hóa file ảnh trước khi seller tạo/cập nhật auction.";
+  if (base === "JsonMapper.java" && relativePath.startsWith("client/")) return "Utility Gson phía client để serialize request và convert response/event payload từ socket.";
+  if (base === "JsonMapper.java" && relativePath.startsWith("server/")) return "Utility Gson phía server để parse request socket và serialize response/event thống nhất.";
   if (layer === "JavaFX Controller") return `Controller JavaFX cho màn ${name.replace("Controller", "")}: nhận event UI, validate input, gọi client service và cập nhật view.`;
   if (layer === "FXML View") return `FXML khai báo layout, fx:id và onAction cho màn ${name.replace("View", "")}.`;
   if (layer === "Client Service") return `Service phía client đóng gói request socket cho các controller, không truy cập database.`;
@@ -118,9 +129,19 @@ function summaryFor(relativePath, layer, lines) {
 
 function lineExplain(code, layer) {
   const trimmed = code.trim();
+  const typeMatch = trimmed.match(/^(?:public\s+)?(?:final\s+|abstract\s+)?(class|interface|enum|record)\s+([A-Za-z_][A-Za-z0-9_]*)/);
   if (trimmed.startsWith("package ")) return "Khai báo package, giúp xác định module và namespace của class.";
   if (trimmed.startsWith("import ")) return "Import dependency được file sử dụng; khi vấn đáp có thể hỏi vì sao cần thư viện này.";
-  if (/public\s+(class|interface|enum|record)\s+/.test(trimmed)) return "Khai báo type chính của file và trách nhiệm lớp.";
+  if (typeMatch) {
+    const [, kind, name] = typeMatch;
+    if (layer === "JavaFX Controller") return `Khai báo ${kind} ${name}; mở từ đây để nói màn này nhận event UI nào, gọi service nào và cập nhật state ra sao.`;
+    if (layer === "Client Utility") return `Khai báo ${kind} ${name}; mở từ đây để nói utility này tách phần dùng chung khỏi controller và tránh lặp code UI/socket.`;
+    if (layer === "Server Service") return `Khai báo ${kind} ${name}; đây là nơi nói business rule, transaction, lock hoặc notification của server.`;
+    if (layer === "Socket/Handler") return `Khai báo ${kind} ${name}; đây là boundary nhận MessageType, kiểm session/role và gọi service.`;
+    if (layer.includes("DAO")) return `Khai báo ${kind} ${name}; đây là boundary SQL/persistence, map dữ liệu giữa SQLite và domain/DTO.`;
+    if (layer === "Common DTO") return `Khai báo ${kind} ${name}; đây là contract payload client-server qua Gson JSON.`;
+    return `Khai báo ${kind} ${name}; dùng để mở đầu phần trách nhiệm chính của file trong layer ${layer}.`;
+  }
   if (/(@FXML|fx:id|onAction)/.test(trimmed)) return "Liên kết JavaFX/FXML giữa view và controller hoặc handler UI.";
   if (/MessageType\./.test(trimmed)) return "Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý.";
   if (/Response\.(ok|error)/.test(trimmed)) return "Tạo response trả về client, gồm trạng thái, message và payload.";
@@ -204,19 +225,117 @@ function normalizeQuestion(q) {
     ? q.tags
     : [q.level, q.topic].filter(Boolean);
   const tags = Array.from(new Set(rawTags));
-  return {
+  const normalized = {
     ...q,
     level: vi(q.level),
     topic: vi(q.topic),
     question: vi(q.question),
     intent: vi(q.intent ?? "Kiểm tra khả năng nối code với luồng chạy, business rule và rủi ro khi demo."),
-    answer: vi(q.answer).length > 1000 ? `${vi(q.answer).slice(0, 997)}...` : vi(q.answer),
     answerBullets,
     mustMention,
     commonMistakes,
     followUps: q.followUps.map(vi),
     tags,
   };
+  const answer = buildLearningAnswer(normalized);
+  return {
+    ...normalized,
+    answer,
+  };
+}
+
+function buildLearningAnswer(q) {
+  const baseAnswer = viText(q.answer || "");
+  const files = extractAnswerFiles(q);
+  const refs = (q.lineRefs ?? []).slice(0, 5);
+  const firstFile = files[0] || q.filePath || "file chính trong câu hỏi";
+  const category = q.tags?.[0] || q.level || "Vấn đáp";
+  const lineGuide = refs.length
+    ? refs
+        .map((ref) => {
+          const refPath = ref.path || q.filePath || firstFile;
+          return `- ${refPath}: dòng ${ref.line} là \`${ref.code}\`. Ý nghĩa: ${viText(ref.explain)}`
+        })
+        .join("\n")
+    : "- Câu này không có line ref tự động; mở file chính, đọc từ class/method đầu tiên rồi nối sang file kế tiếp trong flow.";
+  const fileGuide = files.length
+    ? files.map((file, index) => `${index + 1}. ${file}`).join("\n")
+    : `1. ${firstFile}`;
+  const mustMention = q.mustMention?.slice(0, 6).map(viText) ?? [];
+  const bullets = q.answerBullets?.slice(0, 6).map(viText) ?? [];
+  const followUps = q.followUps?.slice(0, 3).map(viText) ?? [];
+
+  const opening = answerOpeningFor(q, category, firstFile);
+  const reasoning = answerReasoningFor(q, category);
+  const proof = answerProofFor(q, category);
+  const sample = answerSampleSentence(q, category, firstFile);
+
+  return [
+    `1. Câu trả lời ngắn cần nói trước:\n${opening}\n${baseAnswer}`,
+    `2. Cách lần code để trả lời miệng:\n${fileGuide}\nKhi nói, không đọc tên file rời rạc. Hãy nói file trước tạo dữ liệu gì, file sau nhận dữ liệu đó để làm gì, và dữ liệu quay về UI bằng Response hay event nào.`,
+    `3. Giải thích các dòng nên mở:\n${lineGuide}`,
+    `4. Lập luận nghiệp vụ/thiết kế:\n${reasoning}\nCác ý bắt buộc phải chạm tới: ${mustMention.length ? mustMention.join("; ") : "role/layer/input/output/rủi ro/test liên quan"}.`,
+    `5. Cách nói để đạt điểm:\n${bullets.length ? bullets.map((item) => `- ${item}`).join("\n") : "- Nói theo thứ tự: thao tác -> request -> service -> DAO/event -> kết quả."}\n${proof}`,
+    `6. Câu mẫu có thể học thuộc để bắt đầu:\n"${sample}"`,
+    followUps.length
+      ? `7. Nếu bị hỏi tiếp, chuẩn bị trả lời:\n${followUps.map((item) => `- ${item}`).join("\n")}`
+      : "",
+  ].filter(Boolean).join("\n\n");
+}
+
+function extractAnswerFiles(q) {
+  const values = [
+    q.filePath,
+    q.answer,
+    ...(q.mustMention ?? []),
+    ...((q.lineRefs ?? []).map((ref) => ref.path).filter(Boolean)),
+  ].filter(Boolean);
+  const text = values.join(" ");
+  const matches = Array.from(text.matchAll(/(?:common|client|server|docs|\.github)\/[A-Za-z0-9_./-]+\.(?:java|fxml|css|xml|properties|sql|md|yml|yaml)|(?:^|\s)(?:pom\.xml|server\/pom\.xml|client\/pom\.xml|common\/pom\.xml)/g))
+    .map((match) => match[0].trim());
+  return Array.from(new Set(matches)).slice(0, 8);
+}
+
+function answerOpeningFor(q, category, firstFile) {
+  const topic = q.topic || "luồng này";
+  if (category === "Flow") return `Em sẽ trả lời theo luồng end-to-end của ${topic}: bắt đầu từ thao tác người dùng, đi qua client service/socket, vào handler/router, xuống service/DAO, rồi quay lại UI bằng response hoặc realtime event. File mở đầu là ${firstFile}.`;
+  if (category === "Design") return `Em sẽ định nghĩa nguyên lý ${topic} bằng một câu, sau đó chứng minh nó xuất hiện trong code thật. File neo đầu tiên là ${firstFile}; từ đó nối sang layer liên quan để thấy vì sao thiết kế này giúp hệ thống dễ test và ít lỗi hơn.`;
+  if (category === "Pattern") return `Em sẽ nói ${topic} giải quyết vấn đề gì trong dự án, nó nằm ở file nào, và nếu bỏ nó thì coupling/lặp code/rủi ro test sẽ tăng ra sao. File neo đầu tiên là ${firstFile}.`;
+  if (category === "Debug") return `Em sẽ trả lời như một quy trình debug: mô tả triệu chứng, khoanh vùng layer, mở file nghi ngờ đầu tiên là ${firstFile}, kiểm invariant cần giữ, rồi nêu test/manual case tái hiện.`;
+  if (category === "Test") return `Em sẽ giải thích test theo Arrange-Act-Assert, không chỉ nói test pass. File mở đầu là ${firstFile}; cần nói dữ liệu được setup, hành động được gọi, và assert bảo vệ rule nào.`;
+  if (category === "Role") return `Em sẽ phân biệt rõ UI permission và server authorization. File mở đầu là ${firstFile}; server mới là nơi kiểm token, role, owner/resource và business rule.`;
+  if (category === "Line code") return `Em sẽ bắt đầu từ chính dòng được hỏi trong ${firstFile}, giải thích dòng đó thuộc layer nào, ai gọi nó, output đi đâu, và sửa sai thì hỏng flow/test nào.`;
+  return `Em sẽ trả lời từ ${firstFile}, nói trách nhiệm file, input/output và rủi ro nếu sửa sai.`;
+}
+
+function answerReasoningFor(q, category) {
+  if (category === "Flow") return "Điểm quan trọng là client JavaFX không phải nguồn sự thật. Client chỉ validate nhanh và gửi request. Server mới kiểm quyền, kiểm rule nghiệp vụ, ghi SQLite và phát event. Vì vậy câu trả lời phải luôn nối UI với server service và DAO/event.";
+  if (category === "Design") return "Phần thiết kế cần trả lời bằng tradeoff: tách layer giúp dễ test, dễ chia việc và dễ khoanh vùng lỗi; đổi lại phải giữ contract DTO/protocol rõ ràng để không lệch client-server.";
+  if (category === "Pattern") return "Không chỉ nêu định nghĩa pattern. Phải nói pattern giảm phụ thuộc cụ thể nào, giúp mở rộng ở đâu, và test nào chứng minh behavior không bị phá.";
+  if (category === "Debug") return "Khi debug, không nhảy thẳng vào sửa UI. Trước tiên xác định rule thật nằm ở client, socket, handler, service hay DAO; sau đó kiểm log/test để tránh sửa sai layer.";
+  if (category === "Test") return "Một test có giá trị khi nó bảo vệ invariant. Cần nói nếu test fail thì feature nào trong demo có nguy cơ hỏng, không chỉ đọc tên method test.";
+  if (category === "Role") return "Phải nhấn mạnh UI ẩn nút chỉ là UX. Nếu user gửi request bằng tool riêng, RequestRouter/handler/service vẫn phải reject nếu token/role/owner không hợp lệ.";
+  if (category === "Line code") return "Line code chỉ có điểm khi đặt trong flow: dòng này nhận input gì, tạo output gì, invariant nào được giữ, và lỗi sẽ lan sang UI/server/test nào.";
+  return "Luôn nối câu trả lời với input, output, layer chịu trách nhiệm và bằng chứng test/manual case.";
+}
+
+function answerProofFor(q, category) {
+  if (category === "Test") return "Kết thúc bằng câu: test này bảo vệ behavior nào trong demo, ví dụ race condition, authorization, rollback, socket event hoặc mapping SQLite.";
+  if (category === "Debug") return "Kết thúc bằng cách verify: chạy test liên quan hoặc tái hiện manual case, sau đó kiểm UI message/log/database state.";
+  if (category === "Role") return "Kết thúc bằng test authorization hoặc manual case request sai role để chứng minh server không tin client.";
+  if (category === "Line code") return "Kết thúc bằng test/manual case gần nhất có thể fail nếu dòng này bị sửa sai.";
+  return "Kết thúc bằng một bằng chứng: test, manual demo, log server/client hoặc state DB thay đổi đúng.";
+}
+
+function answerSampleSentence(q, category, firstFile) {
+  const topic = q.topic || "phần này";
+  if (category === "Flow") return `Với ${topic}, em đi từ UI trước, nhưng điểm quyết định nằm ở server service; em mở ${firstFile} để bắt đầu rồi lần theo request đến handler, service, DAO và response/event quay về client.`;
+  if (category === "Design" || category === "Pattern") return `${topic} trong project không phải lý thuyết rời rạc; nó thể hiện ở ${firstFile}, giúp tách trách nhiệm, giảm coupling và làm test dễ hơn.`;
+  if (category === "Debug") return `Nếu lỗi ${topic} xảy ra, em không đoán ngay; em tái hiện triệu chứng, mở ${firstFile}, kiểm invariant rồi chạy test liên quan để xác nhận.`;
+  if (category === "Test") return `Test ${topic} chứng minh behavior bằng Arrange-Act-Assert: setup dữ liệu, gọi đúng class/method, rồi assert invariant không bị phá.`;
+  if (category === "Role") return `${topic} phải được bảo vệ ở server; UI chỉ hỗ trợ trải nghiệm, còn ${firstFile} và các lớp server mới quyết định request có được phép chạy không.`;
+  if (category === "Line code") return `Dòng này quan trọng vì nó là một mắt xích trong flow; em sẽ nói nó nhận gì, trả gì, ai gọi nó và nếu sai thì test/demo nào hỏng.`;
+  return `Em sẽ mở ${firstFile}, nói trách nhiệm, luồng dữ liệu và bằng chứng kiểm chứng.`;
 }
 
 function viText(text) {
@@ -721,7 +840,7 @@ function refsFromFiles(files, max = 6) {
             ...file.declarations.map((item) => ({ line: item.line, code: item.code, explain: lineExplain(item.code, file.layer) })),
             ...file.methods.map((item) => ({ line: item.line, code: item.code, explain: lineExplain(item.code, file.layer) })),
           ];
-      return refs.slice(0, 1);
+      return refs.slice(0, 1).map((ref) => ({ ...ref, path: file.path }));
     })
     .slice(0, max);
 }
@@ -1152,7 +1271,7 @@ function inferRoleFromName(text) {
 }
 
 const payload = `/* Auto-generated by scripts/generate-learning-data.mjs from ${repoRoot}. */
-export type GeneratedLineRef = { line: number; code: string; explain: string };
+export type GeneratedLineRef = { line: number; code: string; explain: string; path?: string };
 export type GeneratedCodeFile = {
   path: string;
   absolutePath: string;
@@ -1165,21 +1284,6 @@ export type GeneratedCodeFile = {
   methods: { line: number; name: string; code: string }[];
   importantLines: GeneratedLineRef[];
   fxml: null | { controller: string; controllerLine: number | null; actions: { action: string; line: number; code: string }[] };
-};
-export type GeneratedQuestion = {
-  id: string;
-  level: string;
-  topic: string;
-  question: string;
-  answer: string;
-  intent: string;
-  answerBullets: string[];
-  mustMention: string[];
-  commonMistakes: string[];
-  tags: string[];
-  filePath: string;
-  lineRefs: GeneratedLineRef[];
-  followUps: string[];
 };
 export type GeneratedManualCase = {
   id: string;
@@ -1205,7 +1309,6 @@ export type ProjectAudit = {
 
 export const generatedAt = ${JSON.stringify(new Date().toISOString())};
 export const projectCodeFiles: GeneratedCodeFile[] = ${JSON.stringify(codeFiles, null, 2)};
-export const generatedQuestions: GeneratedQuestion[] = ${JSON.stringify(questions.slice(0, 300), null, 2)};
 export const generatedManualCases: GeneratedManualCase[] = ${JSON.stringify(manualCases, null, 2)};
 export const projectAudit: ProjectAudit = ${JSON.stringify(projectAudit, null, 2)};
 `;
@@ -1218,7 +1321,7 @@ console.log(
     {
       outFile,
       files: codeFiles.length,
-      questions: Math.min(questions.length, 300),
+      interviewQuestions: "src/curatedInterviewQuestions.ts",
       manualCases: manualCases.length,
       audit: {
         totalFilesScanned: projectAudit.totalFilesScanned,

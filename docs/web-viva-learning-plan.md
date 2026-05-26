@@ -736,7 +736,7 @@ Các card bắt buộc:
 
 ### 8.1 Root và Maven
 
-- `pom.xml`: parent POM, module list, Java 21, dependency/plugin management, Checkstyle.
+- `pom.xml`: parent POM, module list, Java 25, dependency/plugin management, Checkstyle.
 - `common/pom.xml`: dependency cho shared model/protocol.
 - `server/pom.xml`: SQLite, BCrypt, Gson, Logback, exec/shade.
 - `client/pom.xml`: JavaFX, Ikonli, module dependency.
@@ -1129,12 +1129,12 @@ Trang `Theory Library` nên gắn link ở cuối từng card. Ưu tiên tài li
 | Chủ đề | Dùng khi học phần nào | Link |
 |---|---|---|
 | JavaFX setup, Maven, Scene Builder | Client JavaFX, FXML, chạy `mvn -pl client javafx:run` | [OpenJFX Getting Started](https://openjfx.io/openjfx-docs/) |
-| JavaFX `Platform.runLater` | Realtime event cập nhật UI từ socket thread | [Oracle JavaFX Platform API](https://docs.oracle.com/javafx/2/api/javafx/application/Platform.html) |
+| JavaFX `Platform.runLater` | Realtime event cập nhật UI từ socket thread | [OpenJFX Platform API](https://openjfx.io/javadoc/25/javafx.graphics/javafx/application/Platform.html) |
 | Java concurrency tổng quan | Race condition, thread, lock, server nhiều client | [Oracle Java Concurrency Tutorial](https://docs.oracle.com/javase/tutorial/essential/concurrency/) |
-| Java SE 21 concurrency APIs | Java 21, thread pool, blocking queue, concurrent utilities | [Oracle Java SE 21 Concurrency](https://docs.oracle.com/en/java/javase/21/core/concurrency.html) |
-| `ReentrantLock` | `AuctionLockManager`, lock theo `auctionId` | [Oracle ReentrantLock API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html) |
-| `ScheduledExecutorService` | `AuctionManagerService`, auto close/settlement retry | [Oracle ScheduledExecutorService API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html) |
-| `CompletableFuture` | `SocketClient.pendingRequests`, async request/response | [Oracle CompletableFuture API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/CompletableFuture.html) |
+| Java SE 25 concurrency APIs | Java 25, thread pool, blocking queue, concurrent utilities | [Oracle Java SE 25 Concurrency](https://docs.oracle.com/en/java/javase/25/core/concurrency.html) |
+| `ReentrantLock` | `AuctionLockManager`, lock theo `auctionId` | [Oracle ReentrantLock API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html) |
+| `ScheduledExecutorService` | `AuctionManagerService`, auto close/settlement retry | [Oracle ScheduledExecutorService API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html) |
+| `CompletableFuture` | `SocketClient.pendingRequests`, async request/response | [Oracle CompletableFuture API](https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/concurrent/CompletableFuture.html) |
 | Maven POM | Root `pom.xml`, module POM, lifecycle | [Maven POM Reference](https://maven.apache.org/maven2/pom.html) |
 | Maven dependency management | `dependencyManagement`, version chung, transitive dependency | [Maven Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html) |
 | JUnit 5 | Unit/integration tests, assertions, lifecycle | [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/) |
