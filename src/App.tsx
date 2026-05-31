@@ -730,6 +730,7 @@ function Visualize({
             "Admin user/auction",
             "Wallet/settlement",
             "Realtime/socket/disconnect",
+            "End notifications winner/outbid",
             "Database/DAO",
             "Maven/CI/Java 25",
             "UI polish/toast/UiMotion",
@@ -1231,6 +1232,17 @@ function CodeMap({
       <div className="file-grid">
         {visibleFiles.map((file) => {
           const guide = buildFileStudyGuide(file);
+          const queryNeedle = query.trim().toLowerCase();
+          const methodChips = [
+            ...file.methods.map((item) => `L${item.line} ${item.name}()`),
+            ...(file.fxml?.actions.map((item) => `L${item.line} #${item.action}`) ?? []),
+          ];
+          const prioritizedMethodChips = queryNeedle
+            ? [
+                ...methodChips.filter((item) => item.toLowerCase().includes(queryNeedle)),
+                ...methodChips.filter((item) => !item.toLowerCase().includes(queryNeedle)),
+              ]
+            : methodChips;
           return (
             <article key={file.path} className="panel file-card">
               <div className="file-head">
@@ -1276,10 +1288,7 @@ function CodeMap({
                 </div>
                 <div>
                   <span>Methods / actions</span>
-                  {[
-                    ...file.methods.slice(0, 5).map((item) => `L${item.line} ${item.name}()`),
-                    ...(file.fxml?.actions.slice(0, 5).map((item) => `L${item.line} #${item.action}`) ?? []),
-                  ].map((item) => (
+                  {prioritizedMethodChips.slice(0, 8).map((item) => (
                     <code key={item}>{item}</code>
                   ))}
                 </div>

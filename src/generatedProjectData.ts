@@ -35,7 +35,7 @@ export type ProjectAudit = {
   note: string;
 };
 
-export const generatedAt = "2026-05-26T04:34:48.861Z";
+export const generatedAt = "2026-05-31T07:38:08.247Z";
 export const projectCodeFiles: GeneratedCodeFile[] = [
   {
     "path": "server/src/main/java/com/auction/server/service/BidService.java",
@@ -304,11 +304,11 @@ export const projectCodeFiles: GeneratedCodeFile[] = [
     "layer": "Server Service",
     "module": "server",
     "extension": ".java",
-    "lineCount": 328,
+    "lineCount": 376,
     "summary": "Service server chứa business rule chính, phối hợp DAO, transaction, lock hoặc notification nếu cần.",
     "declarations": [
       {
-        "line": 19,
+        "line": 24,
         "kind": "class",
         "name": "AuctionManagerService",
         "code": "public class AuctionManagerService {"
@@ -316,119 +316,124 @@ export const projectCodeFiles: GeneratedCodeFile[] = [
     ],
     "methods": [
       {
-        "line": 47,
+        "line": 57,
         "name": "start",
         "code": "public void start() {"
       },
       {
-        "line": 54,
+        "line": 64,
         "name": "stop",
         "code": "public void stop() {"
       },
       {
-        "line": 59,
+        "line": 69,
         "name": "checkStatuses",
         "code": "private void checkStatuses() {"
       },
       {
-        "line": 72,
+        "line": 82,
         "name": "updateStatusIfNecessary",
         "code": "private void updateStatusIfNecessary(Auction auction, LocalDateTime now) {"
       },
       {
-        "line": 240,
+        "line": 251,
         "name": "finalizeFinishedAuction",
         "code": "private AuctionStatus finalizeFinishedAuction(Auction auction) {"
       },
       {
-        "line": 252,
+        "line": 263,
+        "name": "notifyOutbidBidders",
+        "code": "private void notifyOutbidBidders(Auction auction, LocalDateTime now) {"
+      },
+      {
+        "line": 300,
         "name": "settleFinishedAuction",
         "code": "private void settleFinishedAuction(Auction auction) {"
       },
       {
-        "line": 281,
+        "line": 329,
         "name": "refundHighestBidderIfNecessary",
         "code": "private void refundHighestBidderIfNecessary(Auction auction) {"
       },
       {
-        "line": 294,
+        "line": 342,
         "name": "canAttemptSettlement",
         "code": "private boolean canAttemptSettlement(Auction auction, LocalDateTime now) {"
       },
       {
-        "line": 307,
+        "line": 355,
         "name": "markSettlementFailure",
         "code": "private void markSettlementFailure(Auction auction, LocalDateTime now, RuntimeException e) {"
       }
     ],
     "importantLines": [
       {
-        "line": 10,
+        "line": 14,
         "code": "import java.util.concurrent.ScheduledExecutorService;",
         "explain": "Import dependency được file sử dụng; khi vấn đáp có thể hỏi vì sao cần thư viện này."
       },
       {
-        "line": 19,
+        "line": 24,
         "code": "public class AuctionManagerService {",
         "explain": "Khai báo class AuctionManagerService; đây là nơi nói business rule, transaction, lock hoặc notification của server."
       },
       {
-        "line": 29,
+        "line": 35,
         "code": "private final ScheduledExecutorService scheduler;",
         "explain": "Dòng concurrency/scheduler cần giải thích khi bị hỏi race condition."
       },
       {
-        "line": 37,
+        "line": 47,
         "code": "this.scheduler =",
         "explain": "Dòng concurrency/scheduler cần giải thích khi bị hỏi race condition."
       },
       {
-        "line": 50,
+        "line": 60,
         "code": "scheduler.scheduleAtFixedRate(this::checkStatuses, 0, 5, TimeUnit.SECONDS);",
         "explain": "Dòng concurrency/scheduler cần giải thích khi bị hỏi race condition."
       },
       {
-        "line": 56,
+        "line": 66,
         "code": "scheduler.shutdown();",
         "explain": "Dòng concurrency/scheduler cần giải thích khi bị hỏi race condition."
       },
       {
-        "line": 164,
+        "line": 174,
         "code": "notificationService.broadcast(",
         "explain": "Dòng quan trọng để giải thích trách nhiệm file và luồng chạy."
       },
       {
-        "line": 166,
+        "line": 176,
         "code": "com.auction.common.protocol.MessageType.AUCTION_CLOSED,",
         "explain": "Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý."
       },
       {
-        "line": 192,
+        "line": 202,
         "code": "com.auction.common.protocol.MessageType.SYSTEM_NOTIFICATION,",
         "explain": "Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý."
       },
       {
-        "line": 209,
+        "line": 219,
         "code": "com.auction.common.protocol.MessageType.SYSTEM_NOTIFICATION,",
         "explain": "Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý."
       },
       {
-        "line": 225,
+        "line": 236,
         "code": "com.auction.common.protocol.MessageType.SYSTEM_NOTIFICATION,",
         "explain": "Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý."
       },
       {
-        "line": 229,
+        "line": 240,
         "code": "// Global broadcast for list update",
         "explain": "Dòng quan trọng để giải thích trách nhiệm file và luồng chạy."
       },
       {
-        "line": 230,
+        "line": 241,
         "code": "notificationService.broadcastToAllUsers(",
         "explain": "Dòng quan trọng để giải thích trách nhiệm file và luồng chạy."
       },
       {
-        "line": 231,
+        "line": 242,
         "code": "com.auction.common.protocol.MessageType.AUCTION_LIST_UPDATED, null);",
         "explain": "Điểm nối protocol: xác định message client-server đang được gửi hoặc xử lý."
       }
@@ -4824,11 +4829,11 @@ export const projectCodeFiles: GeneratedCodeFile[] = [
     "layer": "Test",
     "module": "server",
     "extension": ".java",
-    "lineCount": 169,
+    "lineCount": 265,
     "summary": "JUnit test kiểm chứng hành vi của AuctionManagerServiceTest.",
     "declarations": [
       {
-        "line": 19,
+        "line": 25,
         "kind": "class",
         "name": "AuctionManagerServiceTest",
         "code": "class AuctionManagerServiceTest {"
@@ -4836,84 +4841,114 @@ export const projectCodeFiles: GeneratedCodeFile[] = [
     ],
     "methods": [
       {
-        "line": 28,
+        "line": 36,
         "name": "setUp",
         "code": "void setUp() {"
       },
       {
-        "line": 34,
+        "line": 42,
+        "name": "tearDown",
+        "code": "void tearDown() {"
+      },
+      {
+        "line": 49,
         "name": "shouldKeepFinishedAuctionWhenSettlementFails",
         "code": "void shouldKeepFinishedAuctionWhenSettlementFails() throws Exception {"
       },
       {
-        "line": 63,
+        "line": 78,
         "name": "shouldAvoidDuplicatePaidStatusUpdateWhenSettlementSucceeds",
         "code": "void shouldAvoidDuplicatePaidStatusUpdateWhenSettlementSucceeds() throws Exception {"
       },
       {
-        "line": 100,
+        "line": 116,
+        "name": "shouldNotifyEachLosingBidderOnceWhenAuctionIsPaid",
+        "code": "void shouldNotifyEachLosingBidderOnceWhenAuctionIsPaid() throws Exception {"
+      },
+      {
+        "line": 173,
         "name": "invokeUpdateStatus",
         "code": "private void invokeUpdateStatus(Auction auction) throws Exception {"
       },
       {
-        "line": 113,
+        "line": 181,
+        "name": "registerUserCapture",
+        "code": "private StringWriter registerUserCapture(long userId) {"
+      },
+      {
+        "line": 189,
+        "name": "bid",
+        "code": "private BidTransaction bid(long id, long bidderId, String amount) {"
+      },
+      {
+        "line": 194,
+        "name": "countOccurrences",
+        "code": "private int countOccurrences(String text, String pattern) {"
+      },
+      {
+        "line": 209,
         "name": "create",
         "code": "public long create(Auction auction) {"
       },
       {
-        "line": 118,
+        "line": 214,
         "name": "findById",
         "code": "public Optional<Auction> findById(long id) {"
       },
       {
-        "line": 123,
+        "line": 219,
         "name": "findByItemId",
         "code": "public Optional<Auction> findByItemId(long itemId) {"
       },
       {
-        "line": 128,
+        "line": 224,
         "name": "findAll",
         "code": "public List<Auction> findAll() {"
       },
       {
-        "line": 133,
+        "line": 229,
         "name": "findByStatus",
         "code": "public List<Auction> findByStatus(AuctionStatus status) {"
       },
       {
-        "line": 138,
+        "line": 234,
         "name": "findByBidderId",
         "code": "public List<Auction> findByBidderId(long bidderId) {"
       },
       {
-        "line": 143,
+        "line": 239,
         "name": "findBySellerId",
         "code": "public List<Auction> findBySellerId(long sellerId) {"
       },
       {
-        "line": 148,
+        "line": 244,
         "name": "update",
         "code": "public void update(Auction auction) {"
       },
       {
-        "line": 153,
+        "line": 249,
         "name": "getSettlementState",
         "code": "public SettlementState getSettlementState(long auctionId) {"
       },
       {
-        "line": 164,
+        "line": 260,
         "name": "clearSettlementFailure",
         "code": "public void clearSettlementFailure(long auctionId) {"
       }
     ],
     "importantLines": [
       {
-        "line": 19,
+        "line": 25,
         "code": "class AuctionManagerServiceTest {",
         "explain": "Khai báo class AuctionManagerServiceTest; dùng để mở đầu phần trách nhiệm chính của file trong layer Test."
       },
       {
-        "line": 108,
+        "line": 44,
+        "code": "registeredWriters.forEach(notificationService::unsubscribeFromAll);",
+        "explain": "Dòng quan trọng để giải thích trách nhiệm file và luồng chạy."
+      },
+      {
+        "line": 204,
         "code": "private static class FakeAuctionDao implements AuctionDao {",
         "explain": "Dòng quan trọng để giải thích trách nhiệm file và luồng chạy."
       }
@@ -12926,7 +12961,7 @@ export const projectCodeFiles: GeneratedCodeFile[] = [
     "layer": "Server",
     "module": "server",
     "extension": ".java",
-    "lineCount": 52,
+    "lineCount": 55,
     "summary": "File ServerMain.java thuộc layer Server.",
     "declarations": [
       {

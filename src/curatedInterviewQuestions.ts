@@ -536,24 +536,25 @@ Khi demo, tạo auction thời gian ngắn hoặc chỉnh fixture gần hết gi
       "Vì sao realtime tốt hơn polling trong live bidding?",
       "Nếu UI stale sau bid, em trace từ đâu?",
       "ClientHandlerIntegrationTest chứng minh phần nào của realtime?",
-      "NotificationManager liên quan gì đến system notification?",
+      "SYSTEM_NOTIFICATION khác broadcast theo auction subscriber ở đâu?",
     ],
     intent: "Giúp học viên hiểu server push event và observer thay vì nghĩ client refresh thủ công.",
-    answer: `Realtime của project là server push qua socket connection đang mở. Client gửi SUBSCRIBE_AUCTION khi vào màn detail/live bidding; SubscriptionRequestHandler đăng ký writer/client handler vào NotificationService theo auctionId. Khi BidService/AuctionService thay đổi state quan trọng như bid mới, auction closed, time extended hoặc list updated, service gọi NotificationService.broadcast. NotificationService đóng vai trò subject trong Observer pattern; các client subscribe là observers.
+    answer: `Realtime của project là server push qua socket connection đang mở. Client gửi SUBSCRIBE_AUCTION khi vào màn detail/live bidding; SubscriptionRequestHandler đăng ký writer/client handler vào NotificationService theo auctionId. Khi BidService/AuctionService/AuctionManagerService thay đổi state quan trọng như bid mới, auction closed, time extended, list updated hoặc thông báo cuối phiên, service gọi NotificationService. Với event theo auction như BID_UPDATE/AUCTION_CLOSED/TIME_EXTENDED thì dùng broadcast theo auctionId. Với thông báo mục tiêu như seller sold, winner won, losing bidder outbid thì dùng notifyUser(userId, SYSTEM_NOTIFICATION, SystemNotificationDto) dựa trên userConnections.
 
-SocketClient có listener thread đọc cả response cho request thường và event server push. Với event UI, client phải chuyển update về JavaFX Application Thread bằng Platform.runLater hoặc cơ chế tương đương; nếu cập nhật trực tiếp từ socket thread sẽ lỗi hoặc UI không ổn định. NotificationManager xử lý toast/system notification trong app, còn các controller như AuctionDetail/LiveBidding cập nhật price/timeline/countdown.
+SocketClient có listener thread đọc cả response cho request thường và event server push. Với event UI, client phải chuyển update về JavaFX Application Thread bằng Platform.runLater hoặc cơ chế tương đương; nếu cập nhật trực tiếp từ socket thread sẽ lỗi hoặc UI không ổn định. NotificationManager xử lý toast/system notification trong app, còn các controller như AuctionDetail/LiveBidding cập nhật price/timeline/countdown. Điểm mới cần nói là outbid end notification: khi AuctionManagerService kết thúc auction PAID, winner nhận "Auction Won", seller nhận "Auction Sold", còn các bidder từng bid nhưng không thắng nhận "You were outbid" đúng một lần.
 
 Khi debug stale UI, trace: client đã subscribe đúng auctionId chưa, server có lưu subscriber không, BidService có broadcast sau commit không, SocketClient listener còn sống không, controller có đăng ký callback không, UI update có chạy đúng thread không. Client disconnect phải cleanup subscriber/writer để tránh gửi vào socket chết. Test nên nhắc ClientHandlerIntegrationTest và SocketClientIntegrationTest.`,
     answerBullets: [
       "Client subscribe khi vào màn cần realtime.",
       "NotificationService giữ observers/subscribers.",
-      "Service broadcast sau thay đổi state.",
+      "Phân biệt broadcast theo auction với notifyUser theo userId.",
       "SocketClient listener nhận event và UI update đúng JavaFX thread.",
+      "AuctionManagerService gửi winner/seller/outbid SYSTEM_NOTIFICATION khi close.",
       "Disconnect phải cleanup subscriber.",
     ],
-    mustMention: ["NotificationService", "SubscriptionRequestHandler", "SocketClient", "BID_UPDATE", "TIME_EXTENDED", "AUCTION_CLOSED"],
-    commonMistakes: ["Nhầm realtime với polling refresh.", "Quên unsubscribe/cleanup khi disconnect.", "Không nói JavaFX thread."],
-    followUps: ["Event có cần requestId không?", "Nếu nhiều admin mở panel thì USER_LIST_UPDATED gửi cho ai?", "Notification gửi trước commit có rủi ro gì?"],
+    mustMention: ["NotificationService", "SubscriptionRequestHandler", "SocketClient", "BID_UPDATE", "TIME_EXTENDED", "AUCTION_CLOSED", "SYSTEM_NOTIFICATION"],
+    commonMistakes: ["Nhầm realtime với polling refresh.", "Nhầm notifyUser cho một user với broadcast theo auction.", "Không nói JavaFX thread."],
+    followUps: ["Event có cần requestId không?", "Vì sao losing bidder chỉ nhận outbid notification một lần?", "Notification gửi trước commit có rủi ro gì?"],
   },
   {
     id: "scheduler-settlement",
@@ -564,7 +565,7 @@ Khi debug stale UI, trace: client đã subscribe đúng auctionId chưa, server 
     lineRefs: [
       { line: 1, code: "ScheduledExecutorService", explain: "Server tự quét auction đến hạn, không phụ thuộc client refresh." },
       { line: 1, code: "transition FINISHED/PAID/CANCELED", explain: "Lifecycle state thay đổi khi close và settlement." },
-      { line: 1, code: "nextRetryAt", explain: "Retry settlement khi lỗi tạm thời." },
+      { line: 1, code: "notifyOutbidBidders", explain: "Gửi SYSTEM_NOTIFICATION cho bidder thua khi auction đã có winner." },
     ],
     prompts: [
       "Vì sao server cần scheduler đóng auction?",
@@ -576,24 +577,24 @@ Khi debug stale UI, trace: client đã subscribe đúng auctionId chưa, server 
       "AuctionSettlementTest chứng minh behavior nào?",
       "Anti-sniping ảnh hưởng scheduler ra sao?",
       "Notification AUCTION_CLOSED được phát lúc nào?",
-      "Khi demo close auction, em nói những file nào?",
+      "Khi auction kết thúc, winner/seller/outbid bidders nhận thông báo nào?",
     ],
     intent: "Giúp học viên trả lời phần background server và state lifecycle.",
-    answer: `AuctionManagerService là background service phía server, thường dùng ScheduledExecutorService để định kỳ tìm auction đã đến hạn. Nó không phụ thuộc việc client có refresh hay mở màn detail hay không. Đây là điểm quan trọng: trạng thái auction là trách nhiệm server. Khi auction endTime đã qua, service chuyển state phù hợp, xác định có winner/reserve hay không, gọi settlement ví nếu cần, và phát event AUCTION_CLOSED/AUCTION_LIST_UPDATED cho client đang subscribe.
+    answer: `AuctionManagerService là background service phía server, thường dùng ScheduledExecutorService để định kỳ tìm auction đã đến hạn. Nó không phụ thuộc việc client có refresh hay mở màn detail hay không. Đây là điểm quan trọng: trạng thái auction là trách nhiệm server. Khi auction endTime đã qua, service chuyển state phù hợp, xác định có winner/reserve hay không, gọi settlement ví nếu cần, và phát event AUCTION_CLOSED/AUCTION_LIST_UPDATED cho client đang subscribe hoặc đang mở list.
 
-Settlement không đơn giản là đổi status. Nếu có winner, hệ thống phải chuyển tiền winner -> seller, release locked funds dư và đảm bảo không tạo/mất tiền. Nếu WalletService hoặc DB lỗi tạm thời, không được đánh dấu PAID giả. Thay vào đó auction có thể ở FINISHED với attempt/nextRetryAt để retry sau. Nếu auction không đạt điều kiện bán hoặc bị cancel, locked funds phải refund/release và status chuyển CANCELED.
+Settlement không đơn giản là đổi status. Nếu có winner, hệ thống phải chuyển tiền winner -> seller, release locked funds dư và đảm bảo không tạo/mất tiền. Nếu WalletService hoặc DB lỗi tạm thời, không được đánh dấu PAID giả. Thay vào đó auction có thể ở FINISHED với attempt/nextRetryAt để retry sau. Khi PAID thành công, AuctionManagerService gửi SYSTEM_NOTIFICATION riêng: seller nhận "Auction Sold", winner nhận "Auction Won", các bidder từng tham gia nhưng không thắng nhận "Auction Ended - You were outbid" kèm final price. Phần outbid dùng bidDao.findByAuctionId, loại winnerId và dedupe losing bidders bằng LinkedHashSet để một bidder bid nhiều lần vẫn chỉ nhận một toast.
 
-Anti-sniping liên quan vì scheduler phải dùng endTime mới sau khi bid sát giờ extend. Nếu scheduler giữ thời gian cũ trong memory và đóng luôn thì rule anti-sniping bị phá. Test cần nhắc AuctionManagerServiceTest và AuctionSettlementTest. Khi trả lời, nói lifecycle: RUNNING -> FINISHED -> PAID hoặc CANCELED, và invariant ví phải đúng.`,
+Anti-sniping liên quan vì scheduler phải dùng endTime mới sau khi bid sát giờ extend. Nếu scheduler giữ thời gian cũ trong memory và đóng luôn thì rule anti-sniping bị phá. Test cần nhắc AuctionManagerServiceTest và AuctionSettlementTest; bản mới của AuctionManagerServiceTest còn kiểm winner không bị báo outbid, loser nhận "You were outbid" đúng một lần và thấy final price. Khi trả lời, nói lifecycle: RUNNING -> FINISHED -> PAID hoặc CANCELED, ví đúng, event đúng và thông báo đúng người.`,
     answerBullets: [
       "Scheduler server-side đóng auction dù client không mở.",
       "Đọc endTime/status từ DB, tôn trọng anti-sniping.",
       "Settlement chuyển tiền và release locked funds.",
       "Retry khi lỗi tạm thời, không đánh dấu PAID sai.",
-      "Broadcast AUCTION_CLOSED/list update sau state hợp lệ.",
+      "Gửi SYSTEM_NOTIFICATION đúng nhóm: seller, winner, outbid bidders.",
     ],
-    mustMention: ["AuctionManagerService", "ScheduledExecutorService", "WalletService", "AuctionSettlementTest", "PAID", "CANCELED"],
-    commonMistakes: ["Nói client refresh mới đóng auction.", "Quên retry settlement.", "Nhầm FINISHED với PAID."],
-    followUps: ["Nếu server tắt lúc auction đến hạn thì sao?", "nextRetryAt có tác dụng gì?", "Auction không có bid thì settlement thế nào?"],
+    mustMention: ["AuctionManagerService", "ScheduledExecutorService", "WalletService", "NotificationService", "SYSTEM_NOTIFICATION", "AuctionManagerServiceTest"],
+    commonMistakes: ["Nói client refresh mới đóng auction.", "Quên retry settlement.", "Gửi outbid notification cho winner hoặc gửi trùng cho bidder bid nhiều lần."],
+    followUps: ["Nếu server tắt lúc auction đến hạn thì sao?", "Vì sao dùng LinkedHashSet khi notify outbid bidders?", "Auction không có bid thì settlement thế nào?"],
   },
   {
     id: "admin-panel",

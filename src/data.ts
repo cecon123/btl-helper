@@ -234,8 +234,16 @@ const scenarioTemplates = {
   settlement: [
     ["server", "SERVICE", "BidService.java", "Khi bid thành công, tiền được lock/giữ để bảo đảm bidder có khả năng thanh toán.", "server/src/main/java/com/auction/server/service/BidService.java"],
     ["server", "SERVICE", "WalletService.java", "Release khi outbid, transfer seller khi winner thắng sau close.", "server/src/main/java/com/auction/server/service/WalletService.java"],
-    ["server", "SCHEDULER", "AuctionManagerService.java", "Đóng auction đến hạn và gọi settlement retry-safe.", "server/src/main/java/com/auction/server/service/AuctionManagerService.java"],
+    ["server", "SCHEDULER", "AuctionManagerService.java", "Đóng auction đến hạn, settle ví, broadcast AUCTION_CLOSED và gửi SYSTEM_NOTIFICATION cho seller/winner/outbid bidders.", "server/src/main/java/com/auction/server/service/AuctionManagerService.java"],
     ["server", "TEST", "AuctionSettlementTest.java / WalletServiceTest.java", "Test chứng minh settlement đúng và lỗi rollback/retry.", "server/src/test/java/com/auction/server/service/AuctionSettlementTest.java"],
+  ],
+  endNotifications: [
+    ["server", "SCHEDULER", "AuctionManagerService.java", "Sau khi auction chuyển PAID/CANCELED, service quyết định ai cần nhận thông báo cuối phiên.", "server/src/main/java/com/auction/server/service/AuctionManagerService.java"],
+    ["common", "DTO", "SystemNotificationDto.java", "Payload toast mục tiêu gồm title, message, type và timestamp.", "common/src/main/java/com/auction/common/dto/notification/SystemNotificationDto.java"],
+    ["server", "EVENT", "NotificationService.notifyUser", "Gửi SYSTEM_NOTIFICATION trực tiếp tới userConnections theo userId, khác broadcast theo auction subscriber.", "server/src/main/java/com/auction/server/service/NotificationService.java"],
+    ["server", "RULE", "notifyOutbidBidders", "Đọc bid history, loại winner, dedupe losing bidders bằng LinkedHashSet và gửi thông báo outbid một lần.", "server/src/main/java/com/auction/server/service/AuctionManagerService.java"],
+    ["client", "UI", "NotificationManager.java", "Client bắt SYSTEM_NOTIFICATION và render toast trong AppShell toastHost.", "client/src/main/java/com/auction/client/util/NotificationManager.java"],
+    ["server", "TEST", "AuctionManagerServiceTest.java", "Test kiểm winner không bị báo outbid, loser nhận 'You were outbid' đúng một lần và thấy final price.", "server/src/test/java/com/auction/server/service/AuctionManagerServiceTest.java"],
   ],
   autoBid: [
     ["client", "UI", "LiveBiddingController.java", "Bidder nhập max bid/increment và bật auto-bid.", "client/src/main/java/com/auction/client/controller/LiveBiddingController.java"],
@@ -337,7 +345,8 @@ const generatedScenarioFlows: ScenarioFlow[] = Object.entries(scenarioTemplates)
     sellerCenter: ["Seller center", "Luồng seller center và stats", "KPI doanh thu, success rate và danh sách phiên của seller."],
     wallet: ["Wallet", "Luồng deposit/withdraw ví", "Available, locked escrow và insufficient funds."],
     placeBid: ["Place bid", "Luồng đặt bid chi tiết", "Từ UI bidder đến lock, transaction, DAO và realtime event."],
-    settlement: ["Settlement", "Luồng escrow và settlement", "Lock fund, release khi outbid, transfer khi winner thắng."],
+    settlement: ["Settlement", "Luồng escrow và settlement", "Lock fund, release khi outbid, transfer khi winner thắng và phát thông báo cuối phiên."],
+    endNotifications: ["End notifications", "Luồng thông báo winner/seller/outbid khi auction kết thúc", "AuctionManagerService gửi SYSTEM_NOTIFICATION có mục tiêu cho seller, winner và các bidder thua."],
     autoBid: ["Auto-bid", "Luồng auto-bidding đầy đủ", "Set max bid, phản hồi tự động, tránh vượt max/loop."],
     antiSniping: ["Anti-sniping", "Luồng anti-sniping kéo dài giờ", "Bid sát giờ, extend endTime, push TIME_EXTENDED."],
     realtime: ["Realtime", "Luồng subscribe/unsubscribe realtime", "Server push event thay vì polling."],
